@@ -4,12 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app.dart';
 
-/// Application entry point.
-/// Configures system UI and initializes the app with Riverpod.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Configure system UI overlay style
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -19,15 +16,10 @@ void main() async {
     ),
   );
 
-  // Lock orientation to portrait mode
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(
-    const ProviderScope(
-      child: TicTacToeApp(),
-    ),
-  );
+  runApp(const ProviderScope(child: TicTacToeApp()));
 }

@@ -7,8 +7,6 @@ import 'core/theme/neumorphic_theme.dart';
 // TODO: Import router when navigation is implemented
 // import 'routes/app_router.dart';
 
-/// Root widget of the application.
-/// Configures Neumorphic theme and routing.
 class TicTacToeApp extends ConsumerWidget {
   const TicTacToeApp({super.key});
 
@@ -18,26 +16,20 @@ class TicTacToeApp extends ConsumerWidget {
       title: AppStrings.appName,
       debugShowCheckedModeBanner: false,
 
-      // Neumorphic Theme Configuration
       themeMode: ThemeMode.light,
       theme: AppNeumorphicTheme.themeData,
       darkTheme: AppNeumorphicTheme.darkThemeData,
 
-      // Material Theme (for Material widgets)
       materialTheme: AppTheme.lightTheme,
       materialDarkTheme: AppTheme.darkTheme,
 
       // TODO: Replace with GoRouter when navigation is implemented
       // routerConfig: ref.watch(appRouterProvider),
-
-      // Temporary home screen placeholder
       home: const _PlaceholderHomeScreen(),
     );
   }
 }
 
-/// Temporary placeholder screen until HomeScreen is implemented.
-/// Will be replaced with GoRouter navigation in Phase 8.
 class _PlaceholderHomeScreen extends StatelessWidget {
   const _PlaceholderHomeScreen();
 
@@ -74,21 +66,15 @@ class _PlaceholderHomeScreen extends StatelessWidget {
                   vertical: 16,
                 ),
                 child: const Text(
-                  'Setup Complete!',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xFF636E72),
-                  ),
+                  'EM CONSTRUÇÃO',
+                  style: TextStyle(fontSize: 16, color: Color(0xFF636E72)),
                 ),
               ),
               const SizedBox(height: 48),
               const Text(
-                'Phase 1 Complete\nProceed to Phase 2: Domain Layer',
+                'APP EM CONSTRUÇÃO\nVolte mais tarde para jogar!',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Color(0xFF95A5A6),
-                ),
+                style: TextStyle(fontSize: 14, color: Color(0xFF95A5A6)),
               ),
             ],
           ),
