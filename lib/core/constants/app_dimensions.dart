@@ -46,4 +46,23 @@ abstract class AppDimensions {
   static const int animationFast = 150;
   static const int animationNormal = 300;
   static const int animationSlow = 500;
+
+  // Neumorphic depth values
+  static const double neumorphicDepthNone = 0.0;
+  static const double neumorphicDepthPressed = -4.0;
+  static const double neumorphicDepthSubtle = 2.0;
+  static const double neumorphicDepthButton = 6.0;
+  static const double neumorphicDepthDefault = 8.0;
+
+  // Neumorphic intensity values
+  static const double neumorphicIntensityNone = 0.0;
+  static const double neumorphicIntensityLight = 0.3;
+  static const double neumorphicIntensityDefault = 0.5;
+  static const double neumorphicIntensityButton = 0.6;
+  static const double neumorphicIntensityPressed = 0.7;
+  static const double neumorphicIntensityHigh = 0.8;
+
+  // Neumorphic surface intensity values
+  static const double neumorphicSurfaceCard = 0.1;
+  static const double neumorphicSurfaceButton = 0.15;
 }

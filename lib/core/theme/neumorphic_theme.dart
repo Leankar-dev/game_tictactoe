@@ -1,86 +1,103 @@
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 import '../constants/app_colors.dart';
+import '../constants/app_dimensions.dart';
 
 abstract class AppNeumorphicTheme {
   static NeumorphicThemeData get themeData => const NeumorphicThemeData(
     baseColor: AppColors.background,
     lightSource: LightSource.topLeft,
-    depth: 8,
-    intensity: 0.5,
+    depth: AppDimensions.neumorphicDepthDefault,
+    intensity: AppDimensions.neumorphicIntensityDefault,
     shadowLightColor: AppColors.shadowLight,
     shadowDarkColor: AppColors.shadowDark,
   );
 
   static NeumorphicThemeData get darkThemeData => const NeumorphicThemeData(
-    baseColor: Color(0xFF2D2D2D),
+    baseColor: AppColors.backgroundDarkTheme,
     lightSource: LightSource.topLeft,
-    depth: 8,
-    intensity: 0.3,
-    shadowLightColor: Color(0xFF3D3D3D),
-    shadowDarkColor: Color(0xFF1D1D1D),
+    depth: AppDimensions.neumorphicDepthDefault,
+    intensity: AppDimensions.neumorphicIntensityLight,
+    shadowLightColor: AppColors.shadowLightDark,
+    shadowDarkColor: AppColors.shadowDarkDark,
   );
 
   static NeumorphicStyle get flatStyle => NeumorphicStyle(
-    depth: 0,
-    intensity: 0,
-    boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+    depth: AppDimensions.neumorphicDepthNone,
+    intensity: AppDimensions.neumorphicIntensityNone,
+    boxShape: NeumorphicBoxShape.roundRect(
+      BorderRadius.circular(AppDimensions.radiusMedium),
+    ),
   );
 
   static NeumorphicStyle get concaveStyle => NeumorphicStyle(
-    depth: -4,
-    intensity: 0.7,
-    boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+    depth: AppDimensions.neumorphicDepthPressed,
+    intensity: AppDimensions.neumorphicIntensityPressed,
+    boxShape: NeumorphicBoxShape.roundRect(
+      BorderRadius.circular(AppDimensions.radiusMedium),
+    ),
   );
 
   static NeumorphicStyle get convexStyle => NeumorphicStyle(
-    depth: 8,
-    intensity: 0.5,
-    boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+    depth: AppDimensions.neumorphicDepthDefault,
+    intensity: AppDimensions.neumorphicIntensityDefault,
+    boxShape: NeumorphicBoxShape.roundRect(
+      BorderRadius.circular(AppDimensions.radiusMedium),
+    ),
   );
 
   static NeumorphicStyle get buttonStyle => NeumorphicStyle(
-    depth: 6,
-    intensity: 0.6,
-    surfaceIntensity: 0.15,
-    boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+    depth: AppDimensions.neumorphicDepthButton,
+    intensity: AppDimensions.neumorphicIntensityButton,
+    surfaceIntensity: AppDimensions.neumorphicSurfaceButton,
+    boxShape: NeumorphicBoxShape.roundRect(
+      BorderRadius.circular(AppDimensions.radiusMedium),
+    ),
   );
 
   static NeumorphicStyle get buttonPressedStyle => NeumorphicStyle(
-    depth: -4,
-    intensity: 0.7,
-    boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+    depth: AppDimensions.neumorphicDepthPressed,
+    intensity: AppDimensions.neumorphicIntensityPressed,
+    boxShape: NeumorphicBoxShape.roundRect(
+      BorderRadius.circular(AppDimensions.radiusMedium),
+    ),
   );
 
   static NeumorphicStyle get cardStyle => NeumorphicStyle(
-    depth: 8,
-    intensity: 0.5,
-    surfaceIntensity: 0.1,
-    boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(16)),
+    depth: AppDimensions.neumorphicDepthDefault,
+    intensity: AppDimensions.neumorphicIntensityDefault,
+    surfaceIntensity: AppDimensions.neumorphicSurfaceCard,
+    boxShape: NeumorphicBoxShape.roundRect(
+      BorderRadius.circular(AppDimensions.radiusLarge),
+    ),
   );
 
   static NeumorphicStyle get cellStyle => NeumorphicStyle(
-    depth: -4,
-    intensity: 0.8,
-    boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
+    depth: AppDimensions.neumorphicDepthPressed,
+    intensity: AppDimensions.neumorphicIntensityHigh,
+    boxShape: NeumorphicBoxShape.roundRect(
+      BorderRadius.circular(AppDimensions.radiusSmall),
+    ),
   );
 
   static NeumorphicStyle get cellActiveStyle => NeumorphicStyle(
-    depth: 2,
-    intensity: 0.5,
-    boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
+    depth: AppDimensions.neumorphicDepthSubtle,
+    intensity: AppDimensions.neumorphicIntensityDefault,
+    boxShape: NeumorphicBoxShape.roundRect(
+      BorderRadius.circular(AppDimensions.radiusSmall),
+    ),
   );
 
   static NeumorphicStyle circularStyle({double size = 48}) =>
       const NeumorphicStyle(
-        depth: 6,
-        intensity: 0.5,
+        depth: AppDimensions.neumorphicDepthButton,
+        intensity: AppDimensions.neumorphicIntensityDefault,
         boxShape: NeumorphicBoxShape.circle(),
       );
 
   static NeumorphicStyle circularPressedStyle({double size = 48}) =>
       const NeumorphicStyle(
-        depth: -4,
-        intensity: 0.7,
+        depth: AppDimensions.neumorphicDepthPressed,
+        intensity: AppDimensions.neumorphicIntensityPressed,
         boxShape: NeumorphicBoxShape.circle(),
       );
 }

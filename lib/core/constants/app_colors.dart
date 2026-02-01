@@ -28,4 +28,9 @@ abstract class AppColors {
   static const Color cellBorder = Color(0xFFD1D9E6);
 
   static const Color winningLine = Color(0xFF00B894);
+
+  // Dark theme colors
+  static const Color backgroundDarkTheme = Color(0xFF2D2D2D);
+  static const Color shadowLightDark = Color(0xFF3D3D3D);
+  static const Color shadowDarkDark = Color(0xFF1D1D1D);
 }
