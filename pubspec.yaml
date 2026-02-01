@@ -11,8 +11,8 @@ dependencies:
     sdk: flutter
 
   # State Management & DI
-  flutter_riverpod: ^3.2.0
-  riverpod_annotation: ^4.0.1
+  flutter_riverpod: ^3.0.3
+  riverpod_annotation: ^3.0.3
 
   # Local Database
   drift: ^2.30.1
@@ -38,13 +38,10 @@ dev_dependencies:
   # Code Generation
   build_runner: ^2.4.15
   drift_dev: ^2.30.1
-  riverpod_generator: ^4.0.2
+  riverpod_generator: ^3.0.3
 
   # Testing
   mocktail: ^1.0.4
-
-dependency_overrides:
-  analyzer: ^9.0.0
 
 flutter:
   uses-material-design: true
