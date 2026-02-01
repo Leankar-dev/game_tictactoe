@@ -1,6 +1,5 @@
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'core/constants/app_strings.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/neumorphic_theme.dart';
@@ -15,11 +14,9 @@ class TicTacToeApp extends ConsumerWidget {
     return NeumorphicApp(
       title: AppStrings.appName,
       debugShowCheckedModeBanner: false,
-
       themeMode: ThemeMode.light,
       theme: AppNeumorphicTheme.themeData,
       darkTheme: AppNeumorphicTheme.darkThemeData,
-
       materialTheme: AppTheme.lightTheme,
       materialDarkTheme: AppTheme.darkTheme,
 
