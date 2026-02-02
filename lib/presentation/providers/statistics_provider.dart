@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/constants/app_strings.dart';
 import '../../core/di/providers.dart';
 import '../../data/models/statistics_model.dart';
 import '../../domain/enums/enums.dart';
@@ -66,14 +67,26 @@ class StatisticsState {
 }
 
 enum StatisticsFilter {
-  all('All Games'),
-  classicPvp('Classic - Player vs Player'),
-  classicPvc('Classic - Player vs CPU'),
-  extendedPvp('Extended - Player vs Player'),
-  extendedPvc('Extended - Player vs CPU');
+  all,
+  classicPvp,
+  classicPvc,
+  extendedPvp,
+  extendedPvc;
 
-  final String displayName;
-  const StatisticsFilter(this.displayName);
+  String get displayName {
+    switch (this) {
+      case StatisticsFilter.all:
+        return AppStrings.allGames;
+      case StatisticsFilter.classicPvp:
+        return AppStrings.classicPvp;
+      case StatisticsFilter.classicPvc:
+        return AppStrings.classicPvc;
+      case StatisticsFilter.extendedPvp:
+        return AppStrings.extendedPvp;
+      case StatisticsFilter.extendedPvc:
+        return AppStrings.extendedPvc;
+    }
+  }
 }
 
 final statisticsProvider = NotifierProvider<StatisticsNotifier, StatisticsState>(StatisticsNotifier.new);
@@ -118,7 +131,7 @@ class StatisticsNotifier extends Notifier<StatisticsState> {
     } catch (e) {
       state = state.copyWith(
         isLoading: false,
-        errorMessage: 'Failed to load statistics: $e',
+        errorMessage: AppStrings.errorWithDetails(AppStrings.failedToLoadStatistics, e),
       );
     }
   }
@@ -137,7 +150,7 @@ class StatisticsNotifier extends Notifier<StatisticsState> {
     } catch (e) {
       state = state.copyWith(
         isLoading: false,
-        errorMessage: 'Failed to reset statistics: $e',
+        errorMessage: AppStrings.errorWithDetails(AppStrings.failedToResetStatistics, e),
       );
     }
   }

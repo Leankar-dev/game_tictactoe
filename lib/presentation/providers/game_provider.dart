@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/constants/app_strings.dart';
 import '../../core/di/providers.dart';
 import '../../domain/entities/entities.dart';
 import '../../domain/enums/enums.dart';
@@ -185,7 +186,7 @@ class GameNotifier extends Notifier<GameState> {
     } catch (e) {
       state = state.copyWith(
         isLoading: false,
-        errorMessage: 'Failed to save game: $e',
+        errorMessage: AppStrings.errorWithDetails(AppStrings.failedToSaveGame, e),
       );
     }
   }

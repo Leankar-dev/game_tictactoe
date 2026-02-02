@@ -63,13 +63,13 @@ class _PlaceholderHomeScreen extends StatelessWidget {
                   vertical: 16,
                 ),
                 child: const Text(
-                  'EM CONSTRUÇÃO',
+                  AppStrings.underConstruction,
                   style: TextStyle(fontSize: 16, color: Color(0xFF636E72)),
                 ),
               ),
               const SizedBox(height: 48),
               const Text(
-                'APP EM CONSTRUÇÃO\nVolte mais tarde para jogar!',
+                AppStrings.underConstructionMessage,
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 14, color: Color(0xFF95A5A6)),
               ),

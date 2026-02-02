@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import '../../core/constants/app_strings.dart';
 import '../../domain/entities/entities.dart';
 import '../../domain/enums/enums.dart';
 
@@ -80,21 +81,21 @@ class GameState extends Equatable {
   }
 
   String get statusMessage {
-    if (isLoading) return 'Loading...';
-    if (isAiThinking) return 'CPU is thinking...';
+    if (isLoading) return AppStrings.loading;
+    if (isAiThinking) return AppStrings.cpuThinking;
     if (errorMessage != null) return errorMessage!;
 
     switch (status) {
       case GameStatus.playing:
         return currentTurn == PlayerType.x
-            ? "${game.playerX.name}'s Turn"
-            : "${game.playerO.name}'s Turn";
+            ? AppStrings.playerTurn(game.playerX.name)
+            : AppStrings.playerTurn(game.playerO.name);
       case GameStatus.xWins:
-        return '${game.playerX.name} Wins!';
+        return AppStrings.playerWins(game.playerX.name);
       case GameStatus.oWins:
-        return '${game.playerO.name} Wins!';
+        return AppStrings.playerWins(game.playerO.name);
       case GameStatus.draw:
-        return "It's a Draw!";
+        return AppStrings.draw;
     }
   }
 

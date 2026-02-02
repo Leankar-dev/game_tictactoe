@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/constants/app_strings.dart';
 import '../../core/di/providers.dart';
 import '../../data/models/settings_model.dart';
 import '../../domain/enums/enums.dart';
@@ -67,7 +68,7 @@ class SettingsNotifier extends Notifier<SettingsState> {
     } catch (e) {
       state = state.copyWith(
         isLoading: false,
-        errorMessage: 'Failed to load settings: $e',
+        errorMessage: AppStrings.errorWithDetails(AppStrings.failedToLoadSettings, e),
       );
     }
   }
@@ -123,7 +124,7 @@ class SettingsNotifier extends Notifier<SettingsState> {
     } catch (e) {
       state = state.copyWith(
         isLoading: false,
-        errorMessage: 'Failed to reset settings: $e',
+        errorMessage: AppStrings.errorWithDetails(AppStrings.failedToResetSettings, e),
       );
     }
   }
@@ -134,7 +135,7 @@ class SettingsNotifier extends Notifier<SettingsState> {
       state = state.copyWith(clearError: true);
     } catch (e) {
       state = state.copyWith(
-        errorMessage: 'Failed to update setting: $e',
+        errorMessage: AppStrings.errorWithDetails(AppStrings.failedToUpdateSetting, e),
       );
     }
   }
