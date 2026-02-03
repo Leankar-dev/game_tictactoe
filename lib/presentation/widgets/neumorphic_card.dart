@@ -3,7 +3,7 @@ import '../../core/constants/app_dimensions.dart';
 
 class NeumorphicCardWidget extends StatelessWidget {
   final Widget child;
-  final EdgeInsetsGeometry? padding;
+  final EdgeInsets? padding;
   final EdgeInsetsGeometry? margin;
   final double borderRadius;
   final double depth;
@@ -26,7 +26,7 @@ class NeumorphicCardWidget extends StatelessWidget {
   factory NeumorphicCardWidget.convex({
     Key? key,
     required Widget child,
-    EdgeInsetsGeometry? padding,
+    EdgeInsets? padding,
     EdgeInsetsGeometry? margin,
     double? width,
     double? height,
@@ -45,7 +45,7 @@ class NeumorphicCardWidget extends StatelessWidget {
   factory NeumorphicCardWidget.concave({
     Key? key,
     required Widget child,
-    EdgeInsetsGeometry? padding,
+    EdgeInsets? padding,
     EdgeInsetsGeometry? margin,
     double? width,
     double? height,
@@ -65,7 +65,7 @@ class NeumorphicCardWidget extends StatelessWidget {
   factory NeumorphicCardWidget.flat({
     Key? key,
     required Widget child,
-    EdgeInsetsGeometry? padding,
+    EdgeInsets? padding,
     EdgeInsetsGeometry? margin,
     double? width,
     double? height,

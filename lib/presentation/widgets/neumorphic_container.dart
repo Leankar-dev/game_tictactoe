@@ -3,7 +3,7 @@ import '../../core/constants/app_dimensions.dart';
 
 class NeumorphicContainerWidget extends StatelessWidget {
   final Widget child;
-  final EdgeInsetsGeometry? padding;
+  final EdgeInsets? padding;
   final EdgeInsetsGeometry? margin;
   final double? width;
   final double? height;
@@ -30,7 +30,7 @@ class NeumorphicContainerWidget extends StatelessWidget {
   factory NeumorphicContainerWidget.circle({
     Key? key,
     required Widget child,
-    EdgeInsetsGeometry? padding,
+    EdgeInsets? padding,
     EdgeInsetsGeometry? margin,
     double? size,
     double depth = 6,
@@ -52,7 +52,7 @@ class NeumorphicContainerWidget extends StatelessWidget {
   factory NeumorphicContainerWidget.pill({
     Key? key,
     required Widget child,
-    EdgeInsetsGeometry? padding,
+    EdgeInsets? padding,
     EdgeInsetsGeometry? margin,
     double? width,
     double height = 40,
@@ -84,7 +84,7 @@ class NeumorphicContainerWidget extends StatelessWidget {
       margin: margin,
       child: Neumorphic(
         style: _getStyle(context),
-        padding: padding,
+        padding: padding ?? EdgeInsets.zero,
         child: child,
       ),
     );
