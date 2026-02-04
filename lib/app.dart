@@ -13,18 +13,18 @@ class TicTacToeApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(appRouterProvider);
 
-    return NeumorphicApp.router(
-      title: AppStrings.appName,
-      debugShowCheckedModeBanner: false,
-
+    return NeumorphicTheme(
       themeMode: ThemeMode.light,
       theme: AppNeumorphicTheme.themeData,
       darkTheme: AppNeumorphicTheme.darkThemeData,
-
-      materialTheme: AppTheme.lightTheme,
-      materialDarkTheme: AppTheme.darkTheme,
-
-      routerConfig: router,
+      child: MaterialApp.router(
+        title: AppStrings.appName,
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.light,
+        routerConfig: router,
+      ),
     );
   }
 }
