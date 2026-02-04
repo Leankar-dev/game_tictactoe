@@ -15,30 +15,32 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return NeumorphicBackground(
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(AppDimensions.spacing24),
-          child: Column(
-            children: [
-              const Spacer(flex: 1),
+    return Scaffold(
+      body: NeumorphicBackground(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(AppDimensions.spacing24),
+            child: Column(
+              children: [
+                const Spacer(flex: 1),
 
-              _buildTitle(),
+                _buildTitle(),
 
-              const Spacer(flex: 1),
+                const Spacer(flex: 1),
 
-              _buildPlayButton(context),
+                _buildPlayButton(context),
 
-              const SizedBox(height: AppDimensions.spacing32),
+                const SizedBox(height: AppDimensions.spacing32),
 
-              _buildQuickPlayOptions(context),
+                _buildQuickPlayOptions(context),
 
-              const Spacer(flex: 2),
+                const Spacer(flex: 2),
 
-              _buildBottomNav(context),
+                _buildBottomNav(context),
 
-              const SizedBox(height: AppDimensions.spacing16),
-            ],
+                const SizedBox(height: AppDimensions.spacing16),
+              ],
+            ),
           ),
         ),
       ),

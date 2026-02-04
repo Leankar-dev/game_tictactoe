@@ -18,151 +18,153 @@ class SettingsScreen extends ConsumerWidget {
     final notifier = ref.read(settingsProvider.notifier);
     final settings = state.settings;
 
-    return NeumorphicBackground(
-      child: SafeArea(
-        child: Column(
-          children: [
-            CustomAppBar(
-              title: AppStrings.settings,
-              showBackButton: true,
-            ),
-            Expanded(
-              child: state.isLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : SingleChildScrollView(
-                      padding: const EdgeInsets.all(AppDimensions.spacing16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildSection(
-                            title: 'Game Defaults',
-                            children: [
-                              _SettingsTile(
-                                title: 'Default Board Size',
-                                subtitle: settings.defaultBoardSize.displayName,
-                                icon: Icons.grid_on,
-                                onTap: () => _showBoardSizeDialog(
-                                  context,
-                                  settings.defaultBoardSize,
-                                  notifier,
-                                ),
-                              ),
-                              _SettingsTile(
-                                title: 'Default Game Mode',
-                                subtitle: settings.defaultGameMode.displayName,
-                                icon: Icons.sports_esports,
-                                onTap: () => _showGameModeDialog(
-                                  context,
-                                  settings.defaultGameMode,
-                                  notifier,
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          _buildSection(
-                            title: 'AI Settings',
-                            children: [
-                              _SettingsTile(
-                                title: AppStrings.difficulty,
-                                subtitle: settings.aiDifficulty.displayName,
-                                icon: Icons.psychology,
-                                onTap: () => _showDifficultyDialog(
-                                  context,
-                                  settings.aiDifficulty,
-                                  notifier,
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          _buildSection(
-                            title: 'Feedback',
-                            children: [
-                              _SettingsTile.toggle(
-                                title: AppStrings.soundEffects,
-                                subtitle: 'Play sounds during game',
-                                icon: Icons.volume_up,
-                                value: settings.soundEnabled,
-                                onChanged: (v) => notifier.setSoundEnabled(v),
-                              ),
-                              _SettingsTile.toggle(
-                                title: AppStrings.hapticFeedback,
-                                subtitle: 'Vibrate on actions',
-                                icon: Icons.vibration,
-                                value: settings.hapticEnabled,
-                                onChanged: (v) => notifier.setHapticEnabled(v),
-                              ),
-                            ],
-                          ),
-
-                          _buildSection(
-                            title: 'Player Names',
-                            children: [
-                              _SettingsTile(
-                                title: 'Player X Name',
-                                subtitle: settings.playerXName,
-                                icon: Icons.person,
-                                onTap: () => _showNameDialog(
-                                  context,
-                                  'Player X Name',
-                                  settings.playerXName,
-                                  (name) => notifier.setPlayerNames(playerX: name),
-                                ),
-                              ),
-                              _SettingsTile(
-                                title: 'Player O Name',
-                                subtitle: settings.playerOName,
-                                icon: Icons.person_outline,
-                                onTap: () => _showNameDialog(
-                                  context,
-                                  'Player O Name',
-                                  settings.playerOName,
-                                  (name) => notifier.setPlayerNames(playerO: name),
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          const SizedBox(height: AppDimensions.spacing24),
-
-                          Center(
-                            child: NeumorphicButtonWidget.secondary(
-                              text: 'Reset to Defaults',
-                              icon: Icons.restore,
-                              onPressed: () => _showResetDialog(context, notifier),
-                            ),
-                          ),
-
-                          const SizedBox(height: AppDimensions.spacing32),
-
-                          Center(
-                            child: Column(
+    return Scaffold(
+      body: NeumorphicBackground(
+        child: SafeArea(
+          child: Column(
+            children: [
+              CustomAppBar(
+                title: AppStrings.settings,
+                showBackButton: true,
+              ),
+              Expanded(
+                child: state.isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : SingleChildScrollView(
+                        padding: const EdgeInsets.all(AppDimensions.spacing16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _buildSection(
+                              title: 'Game Defaults',
                               children: [
-                                Text(
-                                  AppStrings.appName,
-                                  style: TextStyle(
-                                    fontSize: AppDimensions.fontMedium,
-                                    color: AppColors.textSecondary,
+                                _SettingsTile(
+                                  title: 'Default Board Size',
+                                  subtitle: settings.defaultBoardSize.displayName,
+                                  icon: Icons.grid_on,
+                                  onTap: () => _showBoardSizeDialog(
+                                    context,
+                                    settings.defaultBoardSize,
+                                    notifier,
                                   ),
                                 ),
-                                Text(
-                                  'Version ${AppStrings.appVersion}',
-                                  style: TextStyle(
-                                    fontSize: AppDimensions.fontSmall,
-                                    color: AppColors.textLight,
+                                _SettingsTile(
+                                  title: 'Default Game Mode',
+                                  subtitle: settings.defaultGameMode.displayName,
+                                  icon: Icons.sports_esports,
+                                  onTap: () => _showGameModeDialog(
+                                    context,
+                                    settings.defaultGameMode,
+                                    notifier,
                                   ),
                                 ),
                               ],
                             ),
-                          ),
 
-                          const SizedBox(height: AppDimensions.spacing24),
-                        ],
+                            _buildSection(
+                              title: 'AI Settings',
+                              children: [
+                                _SettingsTile(
+                                  title: AppStrings.difficulty,
+                                  subtitle: settings.aiDifficulty.displayName,
+                                  icon: Icons.psychology,
+                                  onTap: () => _showDifficultyDialog(
+                                    context,
+                                    settings.aiDifficulty,
+                                    notifier,
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            _buildSection(
+                              title: 'Feedback',
+                              children: [
+                                _SettingsTile.toggle(
+                                  title: AppStrings.soundEffects,
+                                  subtitle: 'Play sounds during game',
+                                  icon: Icons.volume_up,
+                                  value: settings.soundEnabled,
+                                  onChanged: (v) => notifier.setSoundEnabled(v),
+                                ),
+                                _SettingsTile.toggle(
+                                  title: AppStrings.hapticFeedback,
+                                  subtitle: 'Vibrate on actions',
+                                  icon: Icons.vibration,
+                                  value: settings.hapticEnabled,
+                                  onChanged: (v) => notifier.setHapticEnabled(v),
+                                ),
+                              ],
+                            ),
+
+                            _buildSection(
+                              title: 'Player Names',
+                              children: [
+                                _SettingsTile(
+                                  title: 'Player X Name',
+                                  subtitle: settings.playerXName,
+                                  icon: Icons.person,
+                                  onTap: () => _showNameDialog(
+                                    context,
+                                    'Player X Name',
+                                    settings.playerXName,
+                                    (name) => notifier.setPlayerNames(playerX: name),
+                                  ),
+                                ),
+                                _SettingsTile(
+                                  title: 'Player O Name',
+                                  subtitle: settings.playerOName,
+                                  icon: Icons.person_outline,
+                                  onTap: () => _showNameDialog(
+                                    context,
+                                    'Player O Name',
+                                    settings.playerOName,
+                                    (name) => notifier.setPlayerNames(playerO: name),
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: AppDimensions.spacing24),
+
+                            Center(
+                              child: NeumorphicButtonWidget.secondary(
+                                text: 'Reset to Defaults',
+                                icon: Icons.restore,
+                                onPressed: () => _showResetDialog(context, notifier),
+                              ),
+                            ),
+
+                            const SizedBox(height: AppDimensions.spacing32),
+
+                            Center(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    AppStrings.appName,
+                                    style: TextStyle(
+                                      fontSize: AppDimensions.fontMedium,
+                                      color: AppColors.textSecondary,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Version ${AppStrings.appVersion}',
+                                    style: TextStyle(
+                                      fontSize: AppDimensions.fontSmall,
+                                      color: AppColors.textLight,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            const SizedBox(height: AppDimensions.spacing24),
+                          ],
+                        ),
                       ),
-                    ),
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );

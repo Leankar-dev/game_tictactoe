@@ -20,11 +20,4 @@ abstract class AppRoutes {
   }
 }
 
-
-enum RouteTransition {
-  material,
-  fade,
-  slideRight,
-  slideBottom,
-  scale,
-}
+enum RouteTransition { material, fade, slideRight, slideBottom, scale }

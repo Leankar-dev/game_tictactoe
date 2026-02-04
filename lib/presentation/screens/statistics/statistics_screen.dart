@@ -14,35 +14,37 @@ class StatisticsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(statisticsProvider);
 
-    return NeumorphicBackground(
-      child: SafeArea(
-        child: Column(
-          children: [
-            CustomAppBar(
-              title: AppStrings.statistics,
-              showBackButton: true,
-              actions: [
-                AppBarAction(
-                  icon: Icons.refresh,
-                  tooltip: 'Refresh',
-                  onPressed: () =>
-                      ref.read(statisticsProvider.notifier).refresh(),
-                ),
-              ],
-            ),
+    return Scaffold(
+      body: NeumorphicBackground(
+        child: SafeArea(
+          child: Column(
+            children: [
+              CustomAppBar(
+                title: AppStrings.statistics,
+                showBackButton: true,
+                actions: [
+                  AppBarAction(
+                    icon: Icons.refresh,
+                    tooltip: 'Refresh',
+                    onPressed: () =>
+                        ref.read(statisticsProvider.notifier).refresh(),
+                  ),
+                ],
+              ),
 
-            _FilterTabs(
-              currentFilter: state.currentFilter,
-              onFilterChanged: (filter) =>
-                  ref.read(statisticsProvider.notifier).setFilter(filter),
-            ),
+              _FilterTabs(
+                currentFilter: state.currentFilter,
+                onFilterChanged: (filter) =>
+                    ref.read(statisticsProvider.notifier).setFilter(filter),
+              ),
 
-            Expanded(
-              child: state.isLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : _buildContent(context, ref, state),
-            ),
-          ],
+              Expanded(
+                child: state.isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : _buildContent(context, ref, state),
+              ),
+            ],
+          ),
         ),
       ),
     );

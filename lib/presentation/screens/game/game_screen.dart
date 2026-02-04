@@ -48,59 +48,61 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       }
     });
 
-    return NeumorphicBackground(
-      child: SafeArea(
-        child: Column(
-          children: [
-            CustomAppBar(
-              title: widget.boardSize == BoardSize.classic
-                  ? AppStrings.classicMode
-                  : AppStrings.extendedMode,
-              showBackButton: true,
-              onBackPressed: () => _handleBack(context),
-              actions: [
-                AppBarAction(
-                  icon: Icons.info_outline,
-                  tooltip: 'Game Info',
-                  onPressed: () => _showGameInfo(context),
-                ),
-              ],
-            ),
-            const SizedBox(height: AppDimensions.spacing16),
-            const PlayerIndicatorWidget(),
-            Expanded(
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(AppDimensions.spacing16),
-                  child: BoardWidget(
-                    cellSize: widget.boardSize == BoardSize.classic
-                        ? AppDimensions.cellSizeClassic
-                        : AppDimensions.cellSizeExtended,
+    return Scaffold(
+      body: NeumorphicBackground(
+        child: SafeArea(
+          child: Column(
+            children: [
+              CustomAppBar(
+                title: widget.boardSize == BoardSize.classic
+                    ? AppStrings.classicMode
+                    : AppStrings.extendedMode,
+                showBackButton: true,
+                onBackPressed: () => _handleBack(context),
+                actions: [
+                  AppBarAction(
+                    icon: Icons.info_outline,
+                    tooltip: 'Game Info',
+                    onPressed: () => _showGameInfo(context),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppDimensions.spacing16),
+              const PlayerIndicatorWidget(),
+              Expanded(
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppDimensions.spacing16),
+                    child: BoardWidget(
+                      cellSize: widget.boardSize == BoardSize.classic
+                          ? AppDimensions.cellSizeClassic
+                          : AppDimensions.cellSizeExtended,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: AppDimensions.spacing8,
-              ),
-              child: Text(
-                'Move ${state.moveCount}',
-                style: TextStyle(
-                  fontSize: AppDimensions.fontMedium,
-                  color: AppColors.textSecondary,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: AppDimensions.spacing8,
+                ),
+                child: Text(
+                  'Move ${state.moveCount}',
+                  style: TextStyle(
+                    fontSize: AppDimensions.fontMedium,
+                    color: AppColors.textSecondary,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                bottom: AppDimensions.spacing24,
+              Padding(
+                padding: const EdgeInsets.only(
+                  bottom: AppDimensions.spacing24,
+                ),
+                child: GameControlsWidget(
+                  onMainMenu: () => _handleBack(context),
+                ),
               ),
-              child: GameControlsWidget(
-                onMainMenu: () => _handleBack(context),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

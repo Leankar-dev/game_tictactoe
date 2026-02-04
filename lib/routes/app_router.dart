@@ -67,7 +67,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
   );
 });
 
-
 extension NavigationExtension on BuildContext {
   void goHome() => go(AppRoutes.home);
 
@@ -75,10 +74,12 @@ extension NavigationExtension on BuildContext {
     BoardSize boardSize = BoardSize.classic,
     GameMode gameMode = GameMode.playerVsPlayer,
   }) {
-    go(AppRoutes.gameWithParams(
-      boardSize: boardSize == BoardSize.classic ? 'classic' : 'extended',
-      gameMode: gameMode == GameMode.playerVsPlayer ? 'pvp' : 'pvc',
-    ));
+    go(
+      AppRoutes.gameWithParams(
+        boardSize: boardSize == BoardSize.classic ? 'classic' : 'extended',
+        gameMode: gameMode == GameMode.playerVsPlayer ? 'pvp' : 'pvc',
+      ),
+    );
   }
 
   void goStatistics() => go(AppRoutes.statistics);
