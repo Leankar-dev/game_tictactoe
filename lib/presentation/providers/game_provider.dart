@@ -65,6 +65,7 @@ class GameNotifier extends Notifier<GameState> {
 
   void _executeMove(int row, int col) {
     final makeMoveUseCase = ref.read(makeMoveUseCaseProvider);
+    final feedbackService = ref.read(feedbackServiceProvider);
     final result = makeMoveUseCase(state.game, row: row, col: col);
 
     switch (result) {
@@ -77,12 +78,21 @@ class GameNotifier extends Notifier<GameState> {
         );
 
         if (success.gameEnded) {
+          if (success.isWinningMove) {
+            feedbackService.onWin();
+          } else {
+            feedbackService.onDraw();
+          }
           _onGameOver();
-        } else if (state.isCpuTurn) {
-          _scheduleCpuMove();
+        } else {
+          feedbackService.onMove();
+          if (state.isCpuTurn) {
+            _scheduleCpuMove();
+          }
         }
 
       case MakeMoveFailure failure:
+        feedbackService.errorFeedback();
         state = state.copyWith(
           errorMessage: failure.message,
         );

@@ -5,6 +5,8 @@ import '../../domain/usecases/check_winner_usecase.dart';
 import '../../domain/usecases/make_move_usecase.dart';
 import '../../domain/usecases/ai_move_usecase.dart';
 import '../../domain/usecases/difficulty_ai_usecase.dart';
+import '../utils/feedback_service.dart';
+import '../../presentation/providers/settings_provider.dart';
 
 final databaseProvider = Provider<AppDatabase>((ref) {
   final database = AppDatabase();
@@ -48,4 +50,15 @@ final aiMoveUseCaseProvider = Provider<AiMoveUseCase>((ref) {
 final difficultyAiUseCaseProvider = Provider<DifficultyAiUseCase>((ref) {
   final checkWinnerUseCase = ref.watch(checkWinnerUseCaseProvider);
   return DifficultyAiUseCase(checkWinnerUseCase: checkWinnerUseCase);
+});
+
+final feedbackServiceProvider = Provider<FeedbackService>((ref) {
+  final service = FeedbackService();
+
+  ref.listen(settingsProvider, (previous, next) {
+    service.setSoundEnabled(next.settings.soundEnabled);
+    service.setHapticEnabled(next.settings.hapticEnabled);
+  });
+
+  return service;
 });
