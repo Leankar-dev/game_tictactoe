@@ -53,11 +53,13 @@ void main() {
     testWidgets('should call onTap when empty and enabled', (tester) async {
       bool tapped = false;
 
-      await tester.pumpWidget(createWidget(
-        player: PlayerType.none,
-        isEnabled: true,
-        onTap: () => tapped = true,
-      ));
+      await tester.pumpWidget(
+        createWidget(
+          player: PlayerType.none,
+          isEnabled: true,
+          onTap: () => tapped = true,
+        ),
+      );
 
       await tester.tap(find.byType(CellWidget));
       await tester.pump();
@@ -68,11 +70,13 @@ void main() {
     testWidgets('should not call onTap when occupied', (tester) async {
       bool tapped = false;
 
-      await tester.pumpWidget(createWidget(
-        player: PlayerType.x,
-        isEnabled: true,
-        onTap: () => tapped = true,
-      ));
+      await tester.pumpWidget(
+        createWidget(
+          player: PlayerType.x,
+          isEnabled: true,
+          onTap: () => tapped = true,
+        ),
+      );
 
       await tester.tap(find.byType(CellWidget));
       await tester.pump();
@@ -83,11 +87,13 @@ void main() {
     testWidgets('should not call onTap when disabled', (tester) async {
       bool tapped = false;
 
-      await tester.pumpWidget(createWidget(
-        player: PlayerType.none,
-        isEnabled: false,
-        onTap: () => tapped = true,
-      ));
+      await tester.pumpWidget(
+        createWidget(
+          player: PlayerType.none,
+          isEnabled: false,
+          onTap: () => tapped = true,
+        ),
+      );
 
       await tester.tap(find.byType(CellWidget));
       await tester.pump();

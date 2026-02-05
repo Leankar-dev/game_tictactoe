@@ -21,13 +21,17 @@ void main() {
   setUp(() {
     mockRepository = MockStatisticsRepository();
 
-    when(() => mockRepository.getStatistics(
-          boardSize: any(named: 'boardSize'),
-          gameMode: any(named: 'gameMode'),
-        )).thenAnswer((_) async => StatisticsModel.empty(
-          boardSize: BoardSize.classic,
-          gameMode: GameMode.playerVsPlayer,
-        ));
+    when(
+      () => mockRepository.getStatistics(
+        boardSize: any(named: 'boardSize'),
+        gameMode: any(named: 'gameMode'),
+      ),
+    ).thenAnswer(
+      (_) async => StatisticsModel.empty(
+        boardSize: BoardSize.classic,
+        gameMode: GameMode.playerVsPlayer,
+      ),
+    );
 
     when(() => mockRepository.getTotalStatistics()).thenAnswer(
       (_) async => StatisticsModel.empty(
@@ -53,10 +57,12 @@ void main() {
 
       await notifier.loadStatistics();
 
-      verify(() => mockRepository.getStatistics(
-            boardSize: BoardSize.classic,
-            gameMode: GameMode.playerVsPlayer,
-          )).called(1);
+      verify(
+        () => mockRepository.getStatistics(
+          boardSize: BoardSize.classic,
+          gameMode: GameMode.playerVsPlayer,
+        ),
+      ).called(1);
       verify(() => mockRepository.getTotalStatistics()).called(1);
     });
 

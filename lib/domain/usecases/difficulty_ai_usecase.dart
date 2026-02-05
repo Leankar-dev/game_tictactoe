@@ -9,11 +9,9 @@ class DifficultyAiUseCase {
   final CheckWinnerUseCase _checkWinnerUseCase;
   final Random _random;
 
-  DifficultyAiUseCase({
-    CheckWinnerUseCase? checkWinnerUseCase,
-    Random? random,
-  })  : _checkWinnerUseCase = checkWinnerUseCase ?? const CheckWinnerUseCase(),
-        _random = random ?? Random();
+  DifficultyAiUseCase({CheckWinnerUseCase? checkWinnerUseCase, Random? random})
+    : _checkWinnerUseCase = checkWinnerUseCase ?? const CheckWinnerUseCase(),
+      _random = random ?? Random();
 
   AiMoveResult call(
     GameEntity game, {
@@ -89,18 +87,12 @@ class DifficultyAiUseCase {
 
     final centerMove = _findCenterMove(game.board);
     if (centerMove != null) {
-      return AiMoveFound(
-        position: centerMove,
-        reason: AiMoveReason.centerMove,
-      );
+      return AiMoveFound(position: centerMove, reason: AiMoveReason.centerMove);
     }
 
     final cornerMove = _findCornerMove(game.board);
     if (cornerMove != null) {
-      return AiMoveFound(
-        position: cornerMove,
-        reason: AiMoveReason.cornerMove,
-      );
+      return AiMoveFound(position: cornerMove, reason: AiMoveReason.cornerMove);
     }
 
     final randomIndex = _random.nextInt(emptyCells.length);
@@ -111,9 +103,7 @@ class DifficultyAiUseCase {
   }
 
   AiMoveResult _playHard(GameEntity game, PlayerType player) {
-    final minimax = MinimaxAiUseCase(
-      checkWinnerUseCase: _checkWinnerUseCase,
-    );
+    final minimax = MinimaxAiUseCase(checkWinnerUseCase: _checkWinnerUseCase);
     return minimax(game, aiPlayer: player);
   }
 

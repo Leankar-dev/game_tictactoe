@@ -165,7 +165,8 @@ class NeumorphicButtonWidget extends StatelessWidget {
 
     final textWidget = Text(
       text,
-      style: textStyle ??
+      style:
+          textStyle ??
           TextStyle(
             fontSize: AppDimensions.fontMedium,
             fontWeight: FontWeight.w600,
@@ -193,11 +194,7 @@ class NeumorphicButtonWidget extends StatelessWidget {
   }
 }
 
-enum NeumorphicButtonVariant {
-  primary,
-  secondary,
-  danger,
-}
+enum NeumorphicButtonVariant { primary, secondary, danger }
 
 class NeumorphicIconButton extends StatelessWidget {
   final IconData icon;

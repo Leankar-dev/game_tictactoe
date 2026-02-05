@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/constants/app_colors.dart';
@@ -52,10 +51,7 @@ class HomeScreen extends ConsumerWidget {
       children: [
         NeumorphicText(
           'TIC TAC',
-          style: const NeumorphicStyle(
-            depth: 4,
-            color: AppColors.playerX,
-          ),
+          style: const NeumorphicStyle(depth: 4, color: AppColors.playerX),
           textStyle: NeumorphicTextStyle(
             fontSize: 48,
             fontWeight: FontWeight.bold,
@@ -63,10 +59,7 @@ class HomeScreen extends ConsumerWidget {
         ),
         NeumorphicText(
           'TOE',
-          style: const NeumorphicStyle(
-            depth: 4,
-            color: AppColors.playerO,
-          ),
+          style: const NeumorphicStyle(depth: 4, color: AppColors.playerO),
           textStyle: NeumorphicTextStyle(
             fontSize: 48,
             fontWeight: FontWeight.bold,
@@ -205,15 +198,11 @@ class HomeScreen extends ConsumerWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => GameScreen(
-          boardSize: boardSize,
-          gameMode: gameMode,
-        ),
+        builder: (_) => GameScreen(boardSize: boardSize, gameMode: gameMode),
       ),
     );
   }
 }
-
 
 class _QuickPlayButton extends StatelessWidget {
   final String label;
@@ -269,7 +258,6 @@ class _QuickPlayButton extends StatelessWidget {
     );
   }
 }
-
 
 class _GameModeSelector extends StatefulWidget {
   const _GameModeSelector();
@@ -349,7 +337,8 @@ class _GameModeSelectorState extends State<_GameModeSelector> {
                   subtitle: 'Player vs Player',
                   icon: Icons.people,
                   isSelected: _gameMode == GameMode.playerVsPlayer,
-                  onTap: () => setState(() => _gameMode = GameMode.playerVsPlayer),
+                  onTap: () =>
+                      setState(() => _gameMode = GameMode.playerVsPlayer),
                 ),
               ),
               const SizedBox(width: AppDimensions.spacing16),
@@ -376,10 +365,8 @@ class _GameModeSelectorState extends State<_GameModeSelector> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => GameScreen(
-                    boardSize: _boardSize,
-                    gameMode: _gameMode,
-                  ),
+                  builder: (_) =>
+                      GameScreen(boardSize: _boardSize, gameMode: _gameMode),
                 ),
               );
             },
@@ -391,7 +378,6 @@ class _GameModeSelectorState extends State<_GameModeSelector> {
     );
   }
 }
-
 
 class _SelectionCard extends StatelessWidget {
   final String title;
@@ -419,7 +405,7 @@ class _SelectionCard extends StatelessWidget {
           boxShape: NeumorphicBoxShape.roundRect(
             BorderRadius.circular(AppDimensions.radiusMedium),
           ),
-          color: isSelected ? AppColors.accent.withOpacity(0.1) : null,
+          color: isSelected ? AppColors.accent.withValues(alpha: 0.1) : null,
         ),
         padding: const EdgeInsets.all(AppDimensions.spacing16),
         child: Column(

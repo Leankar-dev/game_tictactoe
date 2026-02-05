@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/constants/app_colors.dart';
@@ -62,11 +61,7 @@ class StatisticsScreen extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.bar_chart,
-              size: 64,
-              color: AppColors.textLight,
-            ),
+            Icon(Icons.bar_chart, size: 64, color: AppColors.textLight),
             const SizedBox(height: AppDimensions.spacing16),
             Text(
               'No games played yet',
@@ -227,17 +222,13 @@ class StatisticsScreen extends ConsumerWidget {
               ref.read(statisticsProvider.notifier).resetStatistics();
               Navigator.pop(context);
             },
-            child: Text(
-              'Reset',
-              style: TextStyle(color: AppColors.error),
-            ),
+            child: Text('Reset', style: TextStyle(color: AppColors.error)),
           ),
         ],
       ),
     );
   }
 }
-
 
 class _FilterTabs extends StatelessWidget {
   final StatisticsFilter currentFilter;
@@ -290,7 +281,6 @@ class _FilterTabs extends StatelessWidget {
   }
 }
 
-
 class _StatBar extends StatelessWidget {
   final String label;
   final int value;
@@ -317,23 +307,16 @@ class _StatBar extends StatelessWidget {
             Text(label),
             Text(
               '$value (${(percentage * 100).toStringAsFixed(1)}%)',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: color,
-              ),
+              style: TextStyle(fontWeight: FontWeight.bold, color: color),
             ),
           ],
         ),
         const SizedBox(height: 4),
-        NeumorphicProgressContainer(
-          progress: percentage,
-          progressColor: color,
-        ),
+        NeumorphicProgressContainer(progress: percentage, progressColor: color),
       ],
     );
   }
 }
-
 
 class _StreakCard extends StatelessWidget {
   final String player;

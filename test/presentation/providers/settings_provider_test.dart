@@ -18,16 +18,16 @@ void main() {
     mockRepository = MockSettingsRepository();
     settingsStreamController = StreamController<SettingsModel>.broadcast();
 
-    when(() => mockRepository.getSettings())
-        .thenAnswer((_) async => SettingsModel.defaults());
+    when(
+      () => mockRepository.getSettings(),
+    ).thenAnswer((_) async => SettingsModel.defaults());
 
-    when(() => mockRepository.watchSettings())
-        .thenAnswer((_) => settingsStreamController.stream);
+    when(
+      () => mockRepository.watchSettings(),
+    ).thenAnswer((_) => settingsStreamController.stream);
 
     container = ProviderContainer(
-      overrides: [
-        settingsRepositoryProvider.overrideWithValue(mockRepository),
-      ],
+      overrides: [settingsRepositoryProvider.overrideWithValue(mockRepository)],
     );
   });
 
@@ -53,8 +53,9 @@ void main() {
     });
 
     test('should update sound enabled', () async {
-      when(() => mockRepository.updateSoundEnabled(any()))
-          .thenAnswer((_) async {});
+      when(
+        () => mockRepository.updateSoundEnabled(any()),
+      ).thenAnswer((_) async {});
 
       final notifier = container.read(settingsProvider.notifier);
       await notifier.setSoundEnabled(false);

@@ -81,10 +81,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget _buildTitle(BuildContext context) {
     return NeumorphicText(
       title!,
-      style: const NeumorphicStyle(
-        depth: 2,
-        color: AppColors.textPrimary,
-      ),
+      style: const NeumorphicStyle(depth: 2, color: AppColors.textPrimary),
       textStyle: NeumorphicTextStyle(
         fontSize: AppDimensions.fontXLarge,
         fontWeight: FontWeight.bold,

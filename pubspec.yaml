@@ -1,7 +1,7 @@
 name: game_tictactoe
-description: Jogo da Velha (Tic-Tac-Toe) com modos 3x3 e 6x6
+description: Tic-Tac-Toe game with classic (3x3) and extended (6x6) modes.
 publish_to: 'none'
-version: 0.7.1+1
+version: 1.0.0+1
 
 environment:
   sdk: ^3.10.8
@@ -32,6 +32,8 @@ dependencies:
 
 dev_dependencies:
   flutter_test:
+    sdk: flutter
+  integration_test:
     sdk: flutter
   flutter_lints: ^6.0.0
 

@@ -61,7 +61,8 @@ class NeumorphicContainerWidget extends StatelessWidget {
   }) {
     return NeumorphicContainerWidget(
       key: key,
-      padding: padding ??
+      padding:
+          padding ??
           const EdgeInsets.symmetric(
             horizontal: AppDimensions.spacing16,
             vertical: AppDimensions.spacing8,

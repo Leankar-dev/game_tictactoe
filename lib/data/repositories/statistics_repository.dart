@@ -46,7 +46,8 @@ class StatisticsRepository {
       oWins: pvpStats.oWins + pvcStats.oWins,
       draws: pvpStats.draws + pvcStats.draws,
       totalMoves: pvpStats.totalMoves + pvcStats.totalMoves,
-      totalDurationSeconds: pvpStats.totalDurationSeconds + pvcStats.totalDurationSeconds,
+      totalDurationSeconds:
+          pvpStats.totalDurationSeconds + pvcStats.totalDurationSeconds,
       xWinStreak: pvpStats.xWinStreak > pvcStats.xWinStreak
           ? pvpStats.xWinStreak
           : pvcStats.xWinStreak,
@@ -75,21 +76,27 @@ class StatisticsRepository {
       );
     }
 
-    return allStats.reduce((a, b) => StatisticsModel(
-      boardSize: BoardSize.classic,
-      gameMode: GameMode.playerVsPlayer,
-      totalGames: a.totalGames + b.totalGames,
-      xWins: a.xWins + b.xWins,
-      oWins: a.oWins + b.oWins,
-      draws: a.draws + b.draws,
-      totalMoves: a.totalMoves + b.totalMoves,
-      totalDurationSeconds: a.totalDurationSeconds + b.totalDurationSeconds,
-      xWinStreak: a.xWinStreak > b.xWinStreak ? a.xWinStreak : b.xWinStreak,
-      oWinStreak: a.oWinStreak > b.oWinStreak ? a.oWinStreak : b.oWinStreak,
-      xBestStreak: a.xBestStreak > b.xBestStreak ? a.xBestStreak : b.xBestStreak,
-      oBestStreak: a.oBestStreak > b.oBestStreak ? a.oBestStreak : b.oBestStreak,
-      updatedAt: a.updatedAt.isAfter(b.updatedAt) ? a.updatedAt : b.updatedAt,
-    ));
+    return allStats.reduce(
+      (a, b) => StatisticsModel(
+        boardSize: BoardSize.classic,
+        gameMode: GameMode.playerVsPlayer,
+        totalGames: a.totalGames + b.totalGames,
+        xWins: a.xWins + b.xWins,
+        oWins: a.oWins + b.oWins,
+        draws: a.draws + b.draws,
+        totalMoves: a.totalMoves + b.totalMoves,
+        totalDurationSeconds: a.totalDurationSeconds + b.totalDurationSeconds,
+        xWinStreak: a.xWinStreak > b.xWinStreak ? a.xWinStreak : b.xWinStreak,
+        oWinStreak: a.oWinStreak > b.oWinStreak ? a.oWinStreak : b.oWinStreak,
+        xBestStreak: a.xBestStreak > b.xBestStreak
+            ? a.xBestStreak
+            : b.xBestStreak,
+        oBestStreak: a.oBestStreak > b.oBestStreak
+            ? a.oBestStreak
+            : b.oBestStreak,
+        updatedAt: a.updatedAt.isAfter(b.updatedAt) ? a.updatedAt : b.updatedAt,
+      ),
+    );
   }
 
   Future<void> resetAllStatistics() async {

@@ -18,7 +18,8 @@ class Statistics extends Table {
 
   IntColumn get totalMoves => integer().withDefault(const Constant(0))();
 
-  IntColumn get totalDurationSeconds => integer().withDefault(const Constant(0))();
+  IntColumn get totalDurationSeconds =>
+      integer().withDefault(const Constant(0))();
 
   IntColumn get xWinStreak => integer().withDefault(const Constant(0))();
 
@@ -32,6 +33,6 @@ class Statistics extends Table {
 
   @override
   List<Set<Column>>? get uniqueKeys => [
-        {boardSize, gameMode},
-      ];
+    {boardSize, gameMode},
+  ];
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
@@ -27,10 +26,7 @@ void main() {
     BoardSize boardSize = BoardSize.classic,
     GameMode gameMode = GameMode.playerVsPlayer,
   }) {
-    final game = GameEntity.newGame(
-      boardSize: boardSize,
-      mode: gameMode,
-    );
+    final game = GameEntity.newGame(boardSize: boardSize, mode: gameMode);
 
     final initialState = GameState(game: game);
 
@@ -42,10 +38,7 @@ void main() {
       child: NeumorphicApp(
         home: MediaQuery(
           data: const MediaQueryData(size: Size(800, 1200)),
-          child: GameScreen(
-            boardSize: boardSize,
-            gameMode: gameMode,
-          ),
+          child: GameScreen(boardSize: boardSize, gameMode: gameMode),
         ),
       ),
     );

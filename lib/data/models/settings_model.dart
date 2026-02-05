@@ -106,8 +106,12 @@ class SettingsModel extends Equatable {
       soundEnabled: Value(soundEnabled),
       hapticEnabled: Value(hapticEnabled),
       aiDifficulty: Value(aiDifficulty.name),
-      defaultBoardSize: Value(defaultBoardSize == BoardSize.classic ? 'classic' : 'extended'),
-      defaultGameMode: Value(defaultGameMode == GameMode.playerVsPlayer ? 'pvp' : 'pvc'),
+      defaultBoardSize: Value(
+        defaultBoardSize == BoardSize.classic ? 'classic' : 'extended',
+      ),
+      defaultGameMode: Value(
+        defaultGameMode == GameMode.playerVsPlayer ? 'pvp' : 'pvc',
+      ),
       themeMode: Value(themeMode.name),
       playerXName: Value(playerXName),
       playerOName: Value(playerOName),
@@ -141,14 +145,14 @@ class SettingsModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        soundEnabled,
-        hapticEnabled,
-        aiDifficulty,
-        defaultBoardSize,
-        defaultGameMode,
-        themeMode,
-        playerXName,
-        playerOName,
-        updatedAt,
-      ];
+    soundEnabled,
+    hapticEnabled,
+    aiDifficulty,
+    defaultBoardSize,
+    defaultGameMode,
+    themeMode,
+    playerXName,
+    playerOName,
+    updatedAt,
+  ];
 }

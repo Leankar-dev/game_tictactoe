@@ -89,7 +89,10 @@ enum StatisticsFilter {
   }
 }
 
-final statisticsProvider = NotifierProvider<StatisticsNotifier, StatisticsState>(StatisticsNotifier.new);
+final statisticsProvider =
+    NotifierProvider<StatisticsNotifier, StatisticsState>(
+      StatisticsNotifier.new,
+    );
 
 class StatisticsNotifier extends Notifier<StatisticsState> {
   @override
@@ -131,7 +134,10 @@ class StatisticsNotifier extends Notifier<StatisticsState> {
     } catch (e) {
       state = state.copyWith(
         isLoading: false,
-        errorMessage: AppStrings.errorWithDetails(AppStrings.failedToLoadStatistics, e),
+        errorMessage: AppStrings.errorWithDetails(
+          AppStrings.failedToLoadStatistics,
+          e,
+        ),
       );
     }
   }
@@ -150,7 +156,10 @@ class StatisticsNotifier extends Notifier<StatisticsState> {
     } catch (e) {
       state = state.copyWith(
         isLoading: false,
-        errorMessage: AppStrings.errorWithDetails(AppStrings.failedToResetStatistics, e),
+        errorMessage: AppStrings.errorWithDetails(
+          AppStrings.failedToResetStatistics,
+          e,
+        ),
       );
     }
   }

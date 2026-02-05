@@ -45,10 +45,7 @@ class _AnimatedCellWidgetState extends State<AnimatedCellWidget>
     );
 
     _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _entryController,
-        curve: Curves.elasticOut,
-      ),
+      CurvedAnimation(parent: _entryController, curve: Curves.elasticOut),
     );
 
     _pulseController = AnimationController(
@@ -57,10 +54,7 @@ class _AnimatedCellWidgetState extends State<AnimatedCellWidget>
     );
 
     _pulseAnimation = Tween<double>(begin: 1.0, end: 1.1).animate(
-      CurvedAnimation(
-        parent: _pulseController,
-        curve: Curves.easeInOut,
-      ),
+      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
     );
 
     if (widget.player != PlayerType.none && widget.shouldAnimate) {
@@ -114,9 +108,7 @@ class _AnimatedCellWidgetState extends State<AnimatedCellWidget>
               child: SizedBox(
                 width: widget.size,
                 height: widget.size,
-                child: Center(
-                  child: _buildContent(),
-                ),
+                child: Center(child: _buildContent()),
               ),
             ),
           );
@@ -154,8 +146,8 @@ class _AnimatedCellWidgetState extends State<AnimatedCellWidget>
     final color = widget.isWinningCell
         ? AppColors.success
         : (widget.player == PlayerType.x
-            ? AppColors.playerX
-            : AppColors.playerO);
+              ? AppColors.playerX
+              : AppColors.playerO);
 
     return ScaleTransition(
       scale: _scaleAnimation,

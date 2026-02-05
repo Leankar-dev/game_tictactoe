@@ -177,10 +177,7 @@ Future<void> _saveGameWithWinner(
   BoardSize boardSize = BoardSize.classic,
   GameMode gameMode = GameMode.playerVsPlayer,
 }) async {
-  var game = GameEntity.newGame(
-    boardSize: boardSize,
-    mode: gameMode,
-  );
+  var game = GameEntity.newGame(boardSize: boardSize, mode: gameMode);
 
   game = game.copyWith(
     status: winner,

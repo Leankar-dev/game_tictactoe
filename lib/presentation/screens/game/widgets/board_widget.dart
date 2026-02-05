@@ -31,8 +31,8 @@ class BoardWidget extends ConsumerWidget {
             ? constraints.maxWidth
             : constraints.maxHeight;
 
-        final calculatedCellSize = cellSize ??
-            _calculateCellSize(availableSize, size, spacing);
+        final calculatedCellSize =
+            cellSize ?? _calculateCellSize(availableSize, size, spacing);
 
         return Neumorphic(
           style: NeumorphicStyle(
@@ -47,9 +47,7 @@ class BoardWidget extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: List.generate(size, (row) {
               return Padding(
-                padding: EdgeInsets.only(
-                  bottom: row < size - 1 ? spacing : 0,
-                ),
+                padding: EdgeInsets.only(bottom: row < size - 1 ? spacing : 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: List.generate(size, (col) {
@@ -87,7 +85,8 @@ class BoardWidget extends ConsumerWidget {
     final player = state.getCellPlayer(row, col);
     final isWinning = state.isWinningCell(row, col);
     final isLastMove = state.isLastMove(row, col);
-    final canPlay = !state.isGameOver &&
+    final canPlay =
+        !state.isGameOver &&
         !state.isLoading &&
         !state.isAiThinking &&
         !state.isCpuTurn;
@@ -149,9 +148,8 @@ class CompactBoardWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: List.generate(gridSize, (col) {
               final player = cells[row][col];
-              final isWinning = winningCells?.any(
-                    (c) => c.row == row && c.col == col,
-                  ) ??
+              final isWinning =
+                  winningCells?.any((c) => c.row == row && c.col == col) ??
                   false;
 
               return Container(

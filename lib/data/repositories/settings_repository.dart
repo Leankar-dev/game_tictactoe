@@ -52,10 +52,9 @@ class SettingsRepository {
 
   Future<void> updatePlayerNames({String? playerX, String? playerO}) async {
     final current = await getSettings();
-    await updateSettings(current.copyWith(
-      playerXName: playerX,
-      playerOName: playerO,
-    ));
+    await updateSettings(
+      current.copyWith(playerXName: playerX, playerOName: playerO),
+    );
   }
 
   Future<void> resetSettings() async {

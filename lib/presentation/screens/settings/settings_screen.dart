@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/constants/app_colors.dart';
@@ -23,10 +22,7 @@ class SettingsScreen extends ConsumerWidget {
         child: SafeArea(
           child: Column(
             children: [
-              CustomAppBar(
-                title: AppStrings.settings,
-                showBackButton: true,
-              ),
+              CustomAppBar(title: AppStrings.settings, showBackButton: true),
               Expanded(
                 child: state.isLoading
                     ? const Center(child: CircularProgressIndicator())
@@ -40,7 +36,8 @@ class SettingsScreen extends ConsumerWidget {
                               children: [
                                 _SettingsTile(
                                   title: 'Default Board Size',
-                                  subtitle: settings.defaultBoardSize.displayName,
+                                  subtitle:
+                                      settings.defaultBoardSize.displayName,
                                   icon: Icons.grid_on,
                                   onTap: () => _showBoardSizeDialog(
                                     context,
@@ -50,7 +47,8 @@ class SettingsScreen extends ConsumerWidget {
                                 ),
                                 _SettingsTile(
                                   title: 'Default Game Mode',
-                                  subtitle: settings.defaultGameMode.displayName,
+                                  subtitle:
+                                      settings.defaultGameMode.displayName,
                                   icon: Icons.sports_esports,
                                   onTap: () => _showGameModeDialog(
                                     context,
@@ -92,7 +90,8 @@ class SettingsScreen extends ConsumerWidget {
                                   subtitle: 'Vibrate on actions',
                                   icon: Icons.vibration,
                                   value: settings.hapticEnabled,
-                                  onChanged: (v) => notifier.setHapticEnabled(v),
+                                  onChanged: (v) =>
+                                      notifier.setHapticEnabled(v),
                                 ),
                               ],
                             ),
@@ -108,7 +107,8 @@ class SettingsScreen extends ConsumerWidget {
                                     context,
                                     'Player X Name',
                                     settings.playerXName,
-                                    (name) => notifier.setPlayerNames(playerX: name),
+                                    (name) =>
+                                        notifier.setPlayerNames(playerX: name),
                                   ),
                                 ),
                                 _SettingsTile(
@@ -119,7 +119,8 @@ class SettingsScreen extends ConsumerWidget {
                                     context,
                                     'Player O Name',
                                     settings.playerOName,
-                                    (name) => notifier.setPlayerNames(playerO: name),
+                                    (name) =>
+                                        notifier.setPlayerNames(playerO: name),
                                   ),
                                 ),
                               ],
@@ -131,7 +132,8 @@ class SettingsScreen extends ConsumerWidget {
                               child: NeumorphicButtonWidget.secondary(
                                 text: 'Reset to Defaults',
                                 icon: Icons.restore,
-                                onPressed: () => _showResetDialog(context, notifier),
+                                onPressed: () =>
+                                    _showResetDialog(context, notifier),
                               ),
                             ),
 
@@ -193,9 +195,7 @@ class SettingsScreen extends ConsumerWidget {
         ),
         NeumorphicCardWidget(
           padding: EdgeInsets.zero,
-          child: Column(
-            children: children,
-          ),
+          child: Column(children: children),
         ),
         const SizedBox(height: AppDimensions.spacing16),
       ],
@@ -268,9 +268,7 @@ class SettingsScreen extends ConsumerWidget {
         content: TextField(
           controller: controller,
           autofocus: true,
-          decoration: const InputDecoration(
-            hintText: 'Enter name',
-          ),
+          decoration: const InputDecoration(hintText: 'Enter name'),
         ),
         actions: [
           TextButton(
@@ -315,7 +313,6 @@ class SettingsScreen extends ConsumerWidget {
   }
 }
 
-
 class _SettingsTile extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -329,8 +326,8 @@ class _SettingsTile extends StatelessWidget {
     required this.subtitle,
     required this.icon,
     this.onTap,
-  })  : toggleValue = null,
-        onToggleChanged = null;
+  }) : toggleValue = null,
+       onToggleChanged = null;
 
   const _SettingsTile.toggle({
     required this.title,
@@ -338,9 +335,9 @@ class _SettingsTile extends StatelessWidget {
     required this.icon,
     required bool value,
     required ValueChanged<bool> onChanged,
-  })  : toggleValue = value,
-        onToggleChanged = onChanged,
-        onTap = null;
+  }) : toggleValue = value,
+       onToggleChanged = onChanged,
+       onTap = null;
 
   @override
   Widget build(BuildContext context) {
@@ -371,22 +368,15 @@ class _SettingsTile extends StatelessWidget {
               ),
             ),
             if (toggleValue != null)
-              NeumorphicSwitch(
-                value: toggleValue!,
-                onChanged: onToggleChanged,
-              )
+              NeumorphicSwitch(value: toggleValue!, onChanged: onToggleChanged)
             else
-              Icon(
-                Icons.chevron_right,
-                color: AppColors.textLight,
-              ),
+              Icon(Icons.chevron_right, color: AppColors.textLight),
           ],
         ),
       ),
     );
   }
 }
-
 
 class _SelectionDialog<T> extends StatelessWidget {
   final String title;

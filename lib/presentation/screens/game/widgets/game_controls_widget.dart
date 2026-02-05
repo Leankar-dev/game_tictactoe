@@ -7,10 +7,7 @@ import '../../../../presentation/widgets/widgets.dart';
 class GameControlsWidget extends ConsumerWidget {
   final VoidCallback? onMainMenu;
 
-  const GameControlsWidget({
-    super.key,
-    this.onMainMenu,
-  });
+  const GameControlsWidget({super.key, this.onMainMenu});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,9 +15,7 @@ class GameControlsWidget extends ConsumerWidget {
     final notifier = ref.read(gameProvider.notifier);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppDimensions.spacing16,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: AppDimensions.spacing16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -109,10 +104,7 @@ class GameControlsWidget extends ConsumerWidget {
 class GameControlsCompact extends ConsumerWidget {
   final VoidCallback? onMainMenu;
 
-  const GameControlsCompact({
-    super.key,
-    this.onMainMenu,
-  });
+  const GameControlsCompact({super.key, this.onMainMenu});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

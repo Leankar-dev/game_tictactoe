@@ -96,8 +96,9 @@ void main() {
     });
 
     test('should take center when only corners taken', () {
-      final board = BoardEntity.empty(BoardSize.classic)
-          .withMove(0, 0, PlayerType.x);
+      final board = BoardEntity.empty(
+        BoardSize.classic,
+      ).withMove(0, 0, PlayerType.x);
       final game = GameEntity.newGame(
         boardSize: BoardSize.classic,
         mode: GameMode.playerVsCpu,
@@ -115,8 +116,9 @@ void main() {
 
   group('AiMoveUseCase - Priority 4: Corners', () {
     test('should take corner when center is taken', () {
-      final board = BoardEntity.empty(BoardSize.classic)
-          .withMove(1, 1, PlayerType.x);
+      final board = BoardEntity.empty(
+        BoardSize.classic,
+      ).withMove(1, 1, PlayerType.x);
       final game = GameEntity.newGame(
         boardSize: BoardSize.classic,
         mode: GameMode.playerVsCpu,
@@ -128,7 +130,8 @@ void main() {
 
       expect(result, isA<AiMoveFound>());
       final found = result as AiMoveFound;
-      final isCorner = (found.row == 0 || found.row == 2) &&
+      final isCorner =
+          (found.row == 0 || found.row == 2) &&
           (found.col == 0 || found.col == 2);
       expect(isCorner, true);
       expect(found.reason, AiMoveReason.cornerMove);

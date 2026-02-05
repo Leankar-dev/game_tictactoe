@@ -26,10 +26,7 @@ class MakeMoveFailure extends MakeMoveResult {
   final String message;
   final MakeMoveError error;
 
-  const MakeMoveFailure({
-    required this.message,
-    required this.error,
-  });
+  const MakeMoveFailure({required this.message, required this.error});
 }
 
 enum MakeMoveError {
@@ -46,9 +43,8 @@ enum MakeMoveError {
 class MakeMoveUseCase {
   final CheckWinnerUseCase _checkWinnerUseCase;
 
-  const MakeMoveUseCase({
-    CheckWinnerUseCase? checkWinnerUseCase,
-  }) : _checkWinnerUseCase = checkWinnerUseCase ?? const CheckWinnerUseCase();
+  const MakeMoveUseCase({CheckWinnerUseCase? checkWinnerUseCase})
+    : _checkWinnerUseCase = checkWinnerUseCase ?? const CheckWinnerUseCase();
 
   MakeMoveResult call(
     GameEntity game, {

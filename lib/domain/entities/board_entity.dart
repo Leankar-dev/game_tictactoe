@@ -5,10 +5,7 @@ class BoardEntity extends Equatable {
   final List<List<PlayerType>> cells;
   final BoardSize size;
 
-  const BoardEntity._({
-    required this.cells,
-    required this.size,
-  });
+  const BoardEntity._({required this.cells, required this.size});
 
   factory BoardEntity.empty(BoardSize size) {
     final cells = List.generate(
@@ -25,7 +22,9 @@ class BoardEntity extends Equatable {
 
   PlayerType getCell(int row, int col) {
     if (row < 0 || row >= size.size || col < 0 || col >= size.size) {
-      throw RangeError('Position ($row, $col) is out of bounds for size ${size.size}');
+      throw RangeError(
+        'Position ($row, $col) is out of bounds for size ${size.size}',
+      );
     }
     return cells[row][col];
   }
@@ -78,7 +77,9 @@ class BoardEntity extends Equatable {
   String toString() {
     final buffer = StringBuffer('BoardEntity(${size.displayName}):\n');
     for (final row in cells) {
-      buffer.writeln(row.map((c) => c == PlayerType.none ? '-' : c.symbol).join(' '));
+      buffer.writeln(
+        row.map((c) => c == PlayerType.none ? '-' : c.symbol).join(' '),
+      );
     }
     return buffer.toString();
   }

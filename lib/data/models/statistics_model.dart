@@ -136,19 +136,19 @@ class StatisticsModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        boardSize,
-        gameMode,
-        totalGames,
-        xWins,
-        oWins,
-        draws,
-        totalMoves,
-        totalDurationSeconds,
-        xWinStreak,
-        oWinStreak,
-        xBestStreak,
-        oBestStreak,
-        updatedAt,
-      ];
+    id,
+    boardSize,
+    gameMode,
+    totalGames,
+    xWins,
+    oWins,
+    draws,
+    totalMoves,
+    totalDurationSeconds,
+    xWinStreak,
+    oWinStreak,
+    xBestStreak,
+    oBestStreak,
+    updatedAt,
+  ];
 }

@@ -46,9 +46,9 @@ void main() {
     });
 
     test('should detect winning move', () {
-      final board = BoardEntity.empty(BoardSize.classic)
-          .withMove(0, 0, PlayerType.x)
-          .withMove(0, 1, PlayerType.x);
+      final board = BoardEntity.empty(
+        BoardSize.classic,
+      ).withMove(0, 0, PlayerType.x).withMove(0, 1, PlayerType.x);
       final game = GameEntity.newGame(
         boardSize: BoardSize.classic,
         mode: GameMode.playerVsPlayer,
@@ -99,8 +99,9 @@ void main() {
     });
 
     test('should fail when cell is occupied', () {
-      final board = BoardEntity.empty(BoardSize.classic)
-          .withMove(0, 0, PlayerType.x);
+      final board = BoardEntity.empty(
+        BoardSize.classic,
+      ).withMove(0, 0, PlayerType.x);
       final game = GameEntity.newGame(
         boardSize: BoardSize.classic,
         mode: GameMode.playerVsPlayer,
@@ -164,8 +165,9 @@ void main() {
     });
 
     test('isValidMove should return false for occupied cell', () {
-      final board = BoardEntity.empty(BoardSize.classic)
-          .withMove(0, 0, PlayerType.x);
+      final board = BoardEntity.empty(
+        BoardSize.classic,
+      ).withMove(0, 0, PlayerType.x);
       final game = GameEntity.newGame(
         boardSize: BoardSize.classic,
         mode: GameMode.playerVsPlayer,
@@ -175,9 +177,9 @@ void main() {
     });
 
     test('getValidMoves should return all empty cells', () {
-      final board = BoardEntity.empty(BoardSize.classic)
-          .withMove(0, 0, PlayerType.x)
-          .withMove(1, 1, PlayerType.o);
+      final board = BoardEntity.empty(
+        BoardSize.classic,
+      ).withMove(0, 0, PlayerType.x).withMove(1, 1, PlayerType.o);
       final game = GameEntity.newGame(
         boardSize: BoardSize.classic,
         mode: GameMode.playerVsPlayer,

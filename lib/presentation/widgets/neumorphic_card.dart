@@ -127,11 +127,7 @@ class NeumorphicCardWidget extends StatelessWidget {
   }
 }
 
-enum NeumorphicCardVariant {
-  convex,
-  concave,
-  flat,
-}
+enum NeumorphicCardVariant { convex, concave, flat }
 
 class StatisticCard extends StatelessWidget {
   final String label;

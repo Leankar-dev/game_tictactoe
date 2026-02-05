@@ -32,10 +32,7 @@ void main() {
           mode: GameMode.playerVsPlayer,
         );
 
-        expect(
-          () => repository.saveGame(game),
-          throwsArgumentError,
-        );
+        expect(() => repository.saveGame(game), throwsArgumentError);
       });
 
       test('should save move history', () async {
@@ -90,8 +87,12 @@ void main() {
         await repository.saveGame(classicGame);
         await repository.saveGame(extendedGame);
 
-        final classicGames = await repository.getGamesByBoardSize(BoardSize.classic);
-        final extendedGames = await repository.getGamesByBoardSize(BoardSize.extended);
+        final classicGames = await repository.getGamesByBoardSize(
+          BoardSize.classic,
+        );
+        final extendedGames = await repository.getGamesByBoardSize(
+          BoardSize.extended,
+        );
 
         expect(classicGames.length, 1);
         expect(classicGames.first.boardSize, BoardSize.classic);
@@ -115,8 +116,12 @@ void main() {
         await repository.saveGame(pvpGame);
         await repository.saveGame(pvcGame);
 
-        final pvpGames = await repository.getGamesByGameMode(GameMode.playerVsPlayer);
-        final pvcGames = await repository.getGamesByGameMode(GameMode.playerVsCpu);
+        final pvpGames = await repository.getGamesByGameMode(
+          GameMode.playerVsPlayer,
+        );
+        final pvcGames = await repository.getGamesByGameMode(
+          GameMode.playerVsCpu,
+        );
 
         expect(pvpGames.length, 1);
         expect(pvpGames.first.gameMode, GameMode.playerVsPlayer);
@@ -129,7 +134,9 @@ void main() {
     group('getRecentGames', () {
       test('should respect limit parameter', () async {
         for (int i = 0; i < 15; i++) {
-          await repository.saveGame(_createCompletedGame(winner: GameStatus.xWins));
+          await repository.saveGame(
+            _createCompletedGame(winner: GameStatus.xWins),
+          );
         }
 
         final recent5 = await repository.getRecentGames(limit: 5);
@@ -181,9 +188,15 @@ void main() {
 
     group('deleteAllGames', () {
       test('should delete all games', () async {
-        await repository.saveGame(_createCompletedGame(winner: GameStatus.xWins));
-        await repository.saveGame(_createCompletedGame(winner: GameStatus.oWins));
-        await repository.saveGame(_createCompletedGame(winner: GameStatus.draw));
+        await repository.saveGame(
+          _createCompletedGame(winner: GameStatus.xWins),
+        );
+        await repository.saveGame(
+          _createCompletedGame(winner: GameStatus.oWins),
+        );
+        await repository.saveGame(
+          _createCompletedGame(winner: GameStatus.draw),
+        );
 
         await repository.deleteAllGames();
         final games = await repository.getAllGames();
@@ -196,10 +209,14 @@ void main() {
       test('should return correct count', () async {
         expect(await repository.getGameCount(), 0);
 
-        await repository.saveGame(_createCompletedGame(winner: GameStatus.xWins));
+        await repository.saveGame(
+          _createCompletedGame(winner: GameStatus.xWins),
+        );
         expect(await repository.getGameCount(), 1);
 
-        await repository.saveGame(_createCompletedGame(winner: GameStatus.oWins));
+        await repository.saveGame(
+          _createCompletedGame(winner: GameStatus.oWins),
+        );
         expect(await repository.getGameCount(), 2);
       });
     });
@@ -212,22 +229,16 @@ GameEntity _createCompletedGame({
   GameMode gameMode = GameMode.playerVsPlayer,
   int movesCount = 5,
 }) {
-  var game = GameEntity.newGame(
-    boardSize: boardSize,
-    mode: gameMode,
-  );
+  var game = GameEntity.newGame(boardSize: boardSize, mode: gameMode);
 
   final moves = <MoveEntity>[];
   for (int i = 0; i < movesCount; i++) {
     final row = i ~/ boardSize.size;
     final col = i % boardSize.size;
     final player = i.isEven ? PlayerType.x : PlayerType.o;
-    moves.add(MoveEntity.create(
-      row: row,
-      col: col,
-      player: player,
-      moveNumber: i + 1,
-    ));
+    moves.add(
+      MoveEntity.create(row: row, col: col, player: player, moveNumber: i + 1),
+    );
   }
 
   var board = BoardEntity.empty(boardSize);
@@ -235,9 +246,5 @@ GameEntity _createCompletedGame({
     board = board.withMove(move.row, move.col, move.player);
   }
 
-  return game.copyWith(
-    board: board,
-    status: winner,
-    moveHistory: moves,
-  );
+  return game.copyWith(board: board, status: winner, moveHistory: moves);
 }

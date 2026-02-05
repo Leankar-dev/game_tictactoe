@@ -36,11 +36,7 @@ void main() {
       child: const NeumorphicApp(
         home: Scaffold(
           body: Center(
-            child: SizedBox(
-              width: 400,
-              height: 400,
-              child: BoardWidget(),
-            ),
+            child: SizedBox(width: 400, height: 400, child: BoardWidget()),
           ),
         ),
       ),

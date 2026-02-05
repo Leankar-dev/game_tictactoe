@@ -10,15 +10,18 @@ class Settings extends Table {
 
   TextColumn get aiDifficulty => text().withDefault(const Constant('medium'))();
 
-  TextColumn get defaultBoardSize => text().withDefault(const Constant('classic'))();
+  TextColumn get defaultBoardSize =>
+      text().withDefault(const Constant('classic'))();
 
   TextColumn get defaultGameMode => text().withDefault(const Constant('pvp'))();
 
   TextColumn get themeMode => text().withDefault(const Constant('light'))();
 
-  TextColumn get playerXName => text().withDefault(const Constant('Player X'))();
+  TextColumn get playerXName =>
+      text().withDefault(const Constant('Player X'))();
 
-  TextColumn get playerOName => text().withDefault(const Constant('Player O'))();
+  TextColumn get playerOName =>
+      text().withDefault(const Constant('Player O'))();
 
   DateTimeColumn get updatedAt => dateTime()();
 

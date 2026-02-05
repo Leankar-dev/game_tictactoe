@@ -30,10 +30,9 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(gameProvider.notifier).startGame(
-            boardSize: widget.boardSize,
-            gameMode: widget.gameMode,
-          );
+      ref
+          .read(gameProvider.notifier)
+          .startGame(boardSize: widget.boardSize, gameMode: widget.gameMode);
     });
   }
 
@@ -94,9 +93,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                  bottom: AppDimensions.spacing24,
-                ),
+                padding: const EdgeInsets.only(bottom: AppDimensions.spacing24),
                 child: GameControlsWidget(
                   onMainMenu: () => _handleBack(context),
                 ),
@@ -115,9 +112,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('Exit Game'),
-          content: const Text(
-            'Your game is in progress. Exit anyway?',
-          ),
+          content: const Text('Your game is in progress. Exit anyway?'),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
@@ -158,9 +153,9 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         onSave: () async {
           await ref.read(gameProvider.notifier).saveGame();
           if (context.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Game saved!')),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text('Game saved!')));
           }
         },
       ),
@@ -221,20 +216,13 @@ class _GameOverDialog extends StatelessWidget {
     return AlertDialog(
       title: Text(
         _getTitle(),
-        style: TextStyle(
-          color: _getTitleColor(),
-          fontWeight: FontWeight.bold,
-        ),
+        style: TextStyle(color: _getTitleColor(), fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
       ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            _getIcon(),
-            size: 64,
-            color: _getTitleColor(),
-          ),
+          Icon(_getIcon(), size: 64, color: _getTitleColor()),
           const SizedBox(height: 16),
           Text(
             'Game completed in $moveCount moves',

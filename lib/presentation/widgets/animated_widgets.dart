@@ -27,21 +27,17 @@ class _AnimatedAppearState extends State<AnimatedAppear>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: widget.duration,
-      vsync: this,
-    );
+    _controller = AnimationController(duration: widget.duration, vsync: this);
 
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: widget.curve),
-    );
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: widget.curve));
 
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.1),
       end: Offset.zero,
-    ).animate(
-      CurvedAnimation(parent: _controller, curve: widget.curve),
-    );
+    ).animate(CurvedAnimation(parent: _controller, curve: widget.curve));
 
     Future.delayed(widget.delay, () {
       if (mounted) _controller.forward();
@@ -58,10 +54,7 @@ class _AnimatedAppearState extends State<AnimatedAppear>
   Widget build(BuildContext context) {
     return FadeTransition(
       opacity: _fadeAnimation,
-      child: SlideTransition(
-        position: _slideAnimation,
-        child: widget.child,
-      ),
+      child: SlideTransition(position: _slideAnimation, child: widget.child),
     );
   }
 }
@@ -83,12 +76,8 @@ class StaggeredList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return direction == Axis.vertical
-        ? Column(
-            children: _buildAnimatedChildren(),
-          )
-        : Row(
-            children: _buildAnimatedChildren(),
-          );
+        ? Column(children: _buildAnimatedChildren())
+        : Row(children: _buildAnimatedChildren());
   }
 
   List<Widget> _buildAnimatedChildren() {
@@ -120,10 +109,7 @@ class AnimatedCounter extends StatelessWidget {
       tween: IntTween(begin: 0, end: value),
       duration: duration,
       builder: (context, value, child) {
-        return Text(
-          value.toString(),
-          style: style,
-        );
+        return Text(value.toString(), style: style);
       },
     );
   }
@@ -133,11 +119,7 @@ class PulseAnimation extends StatefulWidget {
   final Widget child;
   final bool animate;
 
-  const PulseAnimation({
-    super.key,
-    required this.child,
-    this.animate = true,
-  });
+  const PulseAnimation({super.key, required this.child, this.animate = true});
 
   @override
   State<PulseAnimation> createState() => _PulseAnimationState();
@@ -156,9 +138,10 @@ class _PulseAnimationState extends State<PulseAnimation>
       vsync: this,
     );
 
-    _animation = Tween<double>(begin: 1.0, end: 1.1).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _animation = Tween<double>(
+      begin: 1.0,
+      end: 1.1,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
     if (widget.animate) {
       _controller.repeat(reverse: true);
@@ -184,9 +167,6 @@ class _PulseAnimationState extends State<PulseAnimation>
 
   @override
   Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: _animation,
-      child: widget.child,
-    );
+    return ScaleTransition(scale: _animation, child: widget.child);
   }
 }

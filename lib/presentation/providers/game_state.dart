@@ -27,10 +27,7 @@ class GameState extends Equatable {
     GameMode gameMode = GameMode.playerVsPlayer,
   }) {
     return GameState(
-      game: GameEntity.newGame(
-        boardSize: boardSize,
-        mode: gameMode,
-      ),
+      game: GameEntity.newGame(boardSize: boardSize, mode: gameMode),
     );
   }
 
@@ -116,21 +113,23 @@ class GameState extends Equatable {
       errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
       showGameOverDialog: showGameOverDialog ?? this.showGameOverDialog,
       isAiThinking: isAiThinking ?? this.isAiThinking,
-      lastMovePosition: clearLastMove ? null : (lastMovePosition ?? this.lastMovePosition),
+      lastMovePosition: clearLastMove
+          ? null
+          : (lastMovePosition ?? this.lastMovePosition),
       hasUnsavedChanges: hasUnsavedChanges ?? this.hasUnsavedChanges,
     );
   }
 
   @override
   List<Object?> get props => [
-        game,
-        isLoading,
-        errorMessage,
-        showGameOverDialog,
-        isAiThinking,
-        lastMovePosition,
-        hasUnsavedChanges,
-      ];
+    game,
+    isLoading,
+    errorMessage,
+    showGameOverDialog,
+    isAiThinking,
+    lastMovePosition,
+    hasUnsavedChanges,
+  ];
 
   @override
   String toString() =>

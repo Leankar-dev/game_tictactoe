@@ -28,11 +28,7 @@ class PlayerEntity extends Equatable {
     );
   }
 
-  PlayerEntity copyWith({
-    PlayerType? type,
-    String? name,
-    bool? isCpu,
-  }) {
+  PlayerEntity copyWith({PlayerType? type, String? name, bool? isCpu}) {
     return PlayerEntity(
       type: type ?? this.type,
       name: name ?? this.name,
@@ -44,5 +40,6 @@ class PlayerEntity extends Equatable {
   List<Object?> get props => [type, name, isCpu];
 
   @override
-  String toString() => 'PlayerEntity(type: ${type.symbol}, name: $name, isCpu: $isCpu)';
+  String toString() =>
+      'PlayerEntity(type: ${type.symbol}, name: $name, isCpu: $isCpu)';
 }

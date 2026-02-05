@@ -101,18 +101,18 @@ class GameEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        board,
-        playerX,
-        playerO,
-        currentTurn,
-        status,
-        mode,
-        moveHistory,
-        winningCells,
-        createdAt,
-        updatedAt,
-      ];
+    id,
+    board,
+    playerX,
+    playerO,
+    currentTurn,
+    status,
+    mode,
+    moveHistory,
+    winningCells,
+    createdAt,
+    updatedAt,
+  ];
 
   @override
   String toString() =>

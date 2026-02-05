@@ -8,9 +8,7 @@ import 'tables/tables.dart';
 
 part 'database.g.dart';
 
-@DriftDatabase(
-  tables: [Games, Statistics, Settings],
-)
+@DriftDatabase(tables: [Games, Statistics, Settings])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
@@ -34,16 +32,20 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<void> _initializeDefaultSettings() async {
-    final existingSettings = await (select(settings)..limit(1)).getSingleOrNull();
+    final existingSettings = await (select(
+      settings,
+    )..limit(1)).getSingleOrNull();
     if (existingSettings == null) {
-      await into(settings).insert(SettingsCompanion.insert(
-        updatedAt: DateTime.now(),
-      ));
+      await into(
+        settings,
+      ).insert(SettingsCompanion.insert(updatedAt: DateTime.now()));
     }
   }
 
   Future<List<GameRecord>> getAllGames() {
-    return (select(games)..orderBy([(g) => OrderingTerm.desc(g.createdAt)])).get();
+    return (select(
+      games,
+    )..orderBy([(g) => OrderingTerm.desc(g.createdAt)])).get();
   }
 
   Future<List<GameRecord>> getGamesByBoardSize(String boardSize) {
@@ -95,8 +97,9 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<StatisticsRecord?> getStatistics(String boardSize, String gameMode) {
-    return (select(statistics)
-          ..where((s) => s.boardSize.equals(boardSize) & s.gameMode.equals(gameMode)))
+    return (select(statistics)..where(
+          (s) => s.boardSize.equals(boardSize) & s.gameMode.equals(gameMode),
+        ))
         .getSingleOrNull();
   }
 
@@ -118,21 +121,23 @@ class AppDatabase extends _$AppDatabase {
     final existing = await getStatistics(boardSize, gameMode);
 
     if (existing == null) {
-      await into(statistics).insert(StatisticsCompanion.insert(
-        boardSize: boardSize,
-        gameMode: gameMode,
-        totalGames: Value(1),
-        xWins: Value(winner == 'x' ? 1 : 0),
-        oWins: Value(winner == 'o' ? 1 : 0),
-        draws: Value(winner == 'draw' ? 1 : 0),
-        totalMoves: Value(movesCount),
-        totalDurationSeconds: Value(durationSeconds),
-        xWinStreak: Value(winner == 'x' ? 1 : 0),
-        oWinStreak: Value(winner == 'o' ? 1 : 0),
-        xBestStreak: Value(winner == 'x' ? 1 : 0),
-        oBestStreak: Value(winner == 'o' ? 1 : 0),
-        updatedAt: DateTime.now(),
-      ));
+      await into(statistics).insert(
+        StatisticsCompanion.insert(
+          boardSize: boardSize,
+          gameMode: gameMode,
+          totalGames: Value(1),
+          xWins: Value(winner == 'x' ? 1 : 0),
+          oWins: Value(winner == 'o' ? 1 : 0),
+          draws: Value(winner == 'draw' ? 1 : 0),
+          totalMoves: Value(movesCount),
+          totalDurationSeconds: Value(durationSeconds),
+          xWinStreak: Value(winner == 'x' ? 1 : 0),
+          oWinStreak: Value(winner == 'o' ? 1 : 0),
+          xBestStreak: Value(winner == 'x' ? 1 : 0),
+          oBestStreak: Value(winner == 'o' ? 1 : 0),
+          updatedAt: DateTime.now(),
+        ),
+      );
     } else {
       final newXStreak = winner == 'x' ? existing.xWinStreak + 1 : 0;
       final newOStreak = winner == 'o' ? existing.oWinStreak + 1 : 0;
@@ -144,11 +149,21 @@ class AppDatabase extends _$AppDatabase {
           oWins: Value(existing.oWins + (winner == 'o' ? 1 : 0)),
           draws: Value(existing.draws + (winner == 'draw' ? 1 : 0)),
           totalMoves: Value(existing.totalMoves + movesCount),
-          totalDurationSeconds: Value(existing.totalDurationSeconds + durationSeconds),
+          totalDurationSeconds: Value(
+            existing.totalDurationSeconds + durationSeconds,
+          ),
           xWinStreak: Value(newXStreak),
           oWinStreak: Value(newOStreak),
-          xBestStreak: Value(newXStreak > existing.xBestStreak ? newXStreak : existing.xBestStreak),
-          oBestStreak: Value(newOStreak > existing.oBestStreak ? newOStreak : existing.oBestStreak),
+          xBestStreak: Value(
+            newXStreak > existing.xBestStreak
+                ? newXStreak
+                : existing.xBestStreak,
+          ),
+          oBestStreak: Value(
+            newOStreak > existing.oBestStreak
+                ? newOStreak
+                : existing.oBestStreak,
+          ),
           updatedAt: Value(DateTime.now()),
         ),
       );
@@ -173,9 +188,8 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<bool> updateSettings(SettingsCompanion newSettings) async {
-    final rowsAffected = await (update(settings)..where((s) => s.id.equals(1))).write(
-      newSettings.copyWith(updatedAt: Value(DateTime.now())),
-    );
+    final rowsAffected = await (update(settings)..where((s) => s.id.equals(1)))
+        .write(newSettings.copyWith(updatedAt: Value(DateTime.now())));
     return rowsAffected > 0;
   }
 

@@ -18,10 +18,8 @@ class SettingsState {
     this.hasChanges = false,
   });
 
-  factory SettingsState.initial() => SettingsState(
-        settings: SettingsModel.defaults(),
-        isLoading: false,
-      );
+  factory SettingsState.initial() =>
+      SettingsState(settings: SettingsModel.defaults(), isLoading: false);
 
   SettingsState copyWith({
     SettingsModel? settings,
@@ -39,7 +37,9 @@ class SettingsState {
   }
 }
 
-final settingsProvider = NotifierProvider<SettingsNotifier, SettingsState>(SettingsNotifier.new);
+final settingsProvider = NotifierProvider<SettingsNotifier, SettingsState>(
+  SettingsNotifier.new,
+);
 
 class SettingsNotifier extends Notifier<SettingsState> {
   StreamSubscription? _subscription;
@@ -57,10 +57,7 @@ class SettingsNotifier extends Notifier<SettingsState> {
     try {
       final repository = ref.read(settingsRepositoryProvider);
       final settings = await repository.getSettings();
-      state = state.copyWith(
-        settings: settings,
-        isLoading: false,
-      );
+      state = state.copyWith(settings: settings, isLoading: false);
 
       _subscription = repository.watchSettings().listen((settings) {
         state = state.copyWith(settings: settings);
@@ -68,7 +65,10 @@ class SettingsNotifier extends Notifier<SettingsState> {
     } catch (e) {
       state = state.copyWith(
         isLoading: false,
-        errorMessage: AppStrings.errorWithDetails(AppStrings.failedToLoadSettings, e),
+        errorMessage: AppStrings.errorWithDetails(
+          AppStrings.failedToLoadSettings,
+          e,
+        ),
       );
     }
   }
@@ -117,14 +117,14 @@ class SettingsNotifier extends Notifier<SettingsState> {
       final repository = ref.read(settingsRepositoryProvider);
       await repository.resetSettings();
       final settings = await repository.getSettings();
-      state = state.copyWith(
-        settings: settings,
-        isLoading: false,
-      );
+      state = state.copyWith(settings: settings, isLoading: false);
     } catch (e) {
       state = state.copyWith(
         isLoading: false,
-        errorMessage: AppStrings.errorWithDetails(AppStrings.failedToResetSettings, e),
+        errorMessage: AppStrings.errorWithDetails(
+          AppStrings.failedToResetSettings,
+          e,
+        ),
       );
     }
   }
@@ -135,7 +135,10 @@ class SettingsNotifier extends Notifier<SettingsState> {
       state = state.copyWith(clearError: true);
     } catch (e) {
       state = state.copyWith(
-        errorMessage: AppStrings.errorWithDetails(AppStrings.failedToUpdateSetting, e),
+        errorMessage: AppStrings.errorWithDetails(
+          AppStrings.failedToUpdateSetting,
+          e,
+        ),
       );
     }
   }

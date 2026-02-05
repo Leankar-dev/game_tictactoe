@@ -123,8 +123,9 @@ class _PlayerAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color =
-        player == PlayerType.x ? AppColors.playerX : AppColors.playerO;
+    final color = player == PlayerType.x
+        ? AppColors.playerX
+        : AppColors.playerO;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -169,11 +170,7 @@ class _PlayerAvatar extends StatelessWidget {
             ),
             if (isCpu) ...[
               const SizedBox(width: 4),
-              Icon(
-                Icons.computer,
-                size: 12,
-                color: AppColors.textSecondary,
-              ),
+              Icon(Icons.computer, size: 12, color: AppColors.textSecondary),
             ],
           ],
         ),
@@ -192,8 +189,9 @@ class TurnIndicatorCompact extends ConsumerWidget {
 
     if (isGameOver) return const SizedBox.shrink();
 
-    final color =
-        currentTurn == PlayerType.x ? AppColors.playerX : AppColors.playerO;
+    final color = currentTurn == PlayerType.x
+        ? AppColors.playerX
+        : AppColors.playerO;
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -201,10 +199,7 @@ class TurnIndicatorCompact extends ConsumerWidget {
         Container(
           width: 12,
           height: 12,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
         const SizedBox(width: 8),
         Text(

@@ -6,25 +6,37 @@ import 'package:game_tictactoe/domain/entities/entities.dart';
 import 'package:game_tictactoe/domain/enums/enums.dart';
 import 'package:game_tictactoe/presentation/providers/game_provider.dart';
 import 'package:game_tictactoe/core/di/providers.dart';
+import 'package:game_tictactoe/core/utils/feedback_service.dart';
 
 class MockGameRepository extends Mock implements GameRepository {}
 
+class MockFeedbackService extends Mock implements FeedbackService {}
+
 void main() {
   late MockGameRepository mockRepository;
+  late MockFeedbackService mockFeedbackService;
   late ProviderContainer container;
 
   setUpAll(() {
-    registerFallbackValue(GameEntity.newGame(
-      boardSize: BoardSize.classic,
-      mode: GameMode.playerVsPlayer,
-    ));
+    registerFallbackValue(
+      GameEntity.newGame(
+        boardSize: BoardSize.classic,
+        mode: GameMode.playerVsPlayer,
+      ),
+    );
   });
 
   setUp(() {
     mockRepository = MockGameRepository();
+    mockFeedbackService = MockFeedbackService();
+    when(() => mockFeedbackService.onMove()).thenAnswer((_) async {});
+    when(() => mockFeedbackService.onWin()).thenAnswer((_) async {});
+    when(() => mockFeedbackService.onDraw()).thenAnswer((_) async {});
+    when(() => mockFeedbackService.errorFeedback()).thenAnswer((_) async {});
     container = ProviderContainer(
       overrides: [
         gameRepositoryProvider.overrideWithValue(mockRepository),
+        feedbackServiceProvider.overrideWithValue(mockFeedbackService),
       ],
     );
   });

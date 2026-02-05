@@ -69,7 +69,9 @@ class GameModel extends Equatable {
       winner: _statusToWinner(status),
       movesCount: movesCount,
       durationSeconds: Value(durationSeconds),
-      moveHistory: Value(jsonEncode(moveHistory.map((m) => m.toJson()).toList())),
+      moveHistory: Value(
+        jsonEncode(moveHistory.map((m) => m.toJson()).toList()),
+      ),
       createdAt: createdAt,
       completedAt: Value(completedAt),
     );
@@ -142,16 +144,16 @@ class GameModel extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        boardSize,
-        gameMode,
-        status,
-        movesCount,
-        durationSeconds,
-        moveHistory,
-        createdAt,
-        completedAt,
-      ];
+    id,
+    boardSize,
+    gameMode,
+    status,
+    movesCount,
+    durationSeconds,
+    moveHistory,
+    createdAt,
+    completedAt,
+  ];
 }
 
 class MoveModel extends Equatable {

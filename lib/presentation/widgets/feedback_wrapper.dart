@@ -6,11 +6,7 @@ class FeedbackWrapper extends ConsumerWidget {
   final Widget child;
   final VoidCallback? onTap;
 
-  const FeedbackWrapper({
-    super.key,
-    required this.child,
-    this.onTap,
-  });
+  const FeedbackWrapper({super.key, required this.child, this.onTap});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

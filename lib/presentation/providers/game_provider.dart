@@ -9,7 +9,9 @@ import '../../domain/usecases/ai_move_usecase.dart';
 import 'game_state.dart';
 import 'settings_provider.dart';
 
-final gameProvider = NotifierProvider<GameNotifier, GameState>(GameNotifier.new);
+final gameProvider = NotifierProvider<GameNotifier, GameState>(
+  GameNotifier.new,
+);
 
 class GameNotifier extends Notifier<GameState> {
   Timer? _aiDelayTimer;
@@ -45,10 +47,7 @@ class GameNotifier extends Notifier<GameState> {
           : null,
     );
 
-    state = GameState(
-      game: game,
-      hasUnsavedChanges: false,
-    );
+    state = GameState(game: game, hasUnsavedChanges: false);
   }
 
   void makeMove(int row, int col) {
@@ -93,9 +92,7 @@ class GameNotifier extends Notifier<GameState> {
 
       case MakeMoveFailure failure:
         feedbackService.errorFeedback();
-        state = state.copyWith(
-          errorMessage: failure.message,
-        );
+        state = state.copyWith(errorMessage: failure.message);
     }
   }
 
@@ -126,9 +123,7 @@ class GameNotifier extends Notifier<GameState> {
   }
 
   void _onGameOver() {
-    state = state.copyWith(
-      showGameOverDialog: true,
-    );
+    state = state.copyWith(showGameOverDialog: true);
   }
 
   void dismissGameOverDialog() {
@@ -191,14 +186,14 @@ class GameNotifier extends Notifier<GameState> {
       state = state.copyWith(isLoading: true);
       final gameRepository = ref.read(gameRepositoryProvider);
       await gameRepository.saveGame(state.game);
-      state = state.copyWith(
-        isLoading: false,
-        hasUnsavedChanges: false,
-      );
+      state = state.copyWith(isLoading: false, hasUnsavedChanges: false);
     } catch (e) {
       state = state.copyWith(
         isLoading: false,
-        errorMessage: AppStrings.errorWithDetails(AppStrings.failedToSaveGame, e),
+        errorMessage: AppStrings.errorWithDetails(
+          AppStrings.failedToSaveGame,
+          e,
+        ),
       );
     }
   }
@@ -226,5 +221,7 @@ final currentTurnProvider = Provider<PlayerType>((ref) {
 });
 
 final isLoadingProvider = Provider<bool>((ref) {
-  return ref.watch(gameProvider.select((state) => state.isLoading || state.isAiThinking));
+  return ref.watch(
+    gameProvider.select((state) => state.isLoading || state.isAiThinking),
+  );
 });

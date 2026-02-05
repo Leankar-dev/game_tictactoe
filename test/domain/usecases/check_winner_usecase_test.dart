@@ -150,9 +150,9 @@ void main() {
       });
 
       test('should return no winner for game in progress', () {
-        final board = BoardEntity.empty(BoardSize.classic)
-            .withMove(0, 0, PlayerType.x)
-            .withMove(1, 1, PlayerType.o);
+        final board = BoardEntity.empty(
+          BoardSize.classic,
+        ).withMove(0, 0, PlayerType.x).withMove(1, 1, PlayerType.o);
 
         final result = useCase(board);
 
@@ -229,14 +229,8 @@ void main() {
         WinnerCheckResult.winner(PlayerType.o, []).toGameStatus(),
         GameStatus.oWins,
       );
-      expect(
-        WinnerCheckResult.draw().toGameStatus(),
-        GameStatus.draw,
-      );
-      expect(
-        WinnerCheckResult.noWinner().toGameStatus(),
-        GameStatus.playing,
-      );
+      expect(WinnerCheckResult.draw().toGameStatus(), GameStatus.draw);
+      expect(WinnerCheckResult.noWinner().toGameStatus(), GameStatus.playing);
     });
   });
 }

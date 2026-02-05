@@ -12,10 +12,7 @@ class AiMoveFound extends AiMoveResult {
   final ({int row, int col}) position;
   final AiMoveReason reason;
 
-  const AiMoveFound({
-    required this.position,
-    required this.reason,
-  });
+  const AiMoveFound({required this.position, required this.reason});
 
   int get row => position.row;
   int get col => position.col;
@@ -42,11 +39,9 @@ class AiMoveUseCase {
   final CheckWinnerUseCase _checkWinnerUseCase;
   final Random _random;
 
-  AiMoveUseCase({
-    CheckWinnerUseCase? checkWinnerUseCase,
-    Random? random,
-  })  : _checkWinnerUseCase = checkWinnerUseCase ?? const CheckWinnerUseCase(),
-        _random = random ?? Random();
+  AiMoveUseCase({CheckWinnerUseCase? checkWinnerUseCase, Random? random})
+    : _checkWinnerUseCase = checkWinnerUseCase ?? const CheckWinnerUseCase(),
+      _random = random ?? Random();
 
   AiMoveResult call(GameEntity game, {PlayerType? aiPlayer}) {
     final player = aiPlayer ?? game.currentTurn;
@@ -82,25 +77,16 @@ class AiMoveUseCase {
 
     final centerMove = _findCenterMove(game.board);
     if (centerMove != null) {
-      return AiMoveFound(
-        position: centerMove,
-        reason: AiMoveReason.centerMove,
-      );
+      return AiMoveFound(position: centerMove, reason: AiMoveReason.centerMove);
     }
 
     final cornerMove = _findCornerMove(game.board, emptyCells);
     if (cornerMove != null) {
-      return AiMoveFound(
-        position: cornerMove,
-        reason: AiMoveReason.cornerMove,
-      );
+      return AiMoveFound(position: cornerMove, reason: AiMoveReason.cornerMove);
     }
 
     final randomMove = emptyCells[_random.nextInt(emptyCells.length)];
-    return AiMoveFound(
-      position: randomMove,
-      reason: AiMoveReason.randomMove,
-    );
+    return AiMoveFound(position: randomMove, reason: AiMoveReason.randomMove);
   }
 
   ({int row, int col})? _findWinningMove(BoardEntity board, PlayerType player) {
@@ -183,20 +169,15 @@ extension GameEntityAiExtension on GameEntity {
 class MinimaxAiUseCase {
   final CheckWinnerUseCase _checkWinnerUseCase;
 
-  const MinimaxAiUseCase({
-    CheckWinnerUseCase? checkWinnerUseCase,
-  }) : _checkWinnerUseCase = checkWinnerUseCase ?? const CheckWinnerUseCase();
+  const MinimaxAiUseCase({CheckWinnerUseCase? checkWinnerUseCase})
+    : _checkWinnerUseCase = checkWinnerUseCase ?? const CheckWinnerUseCase();
 
   /// Calculates the best move using Minimax.
   ///
   /// [game] - Current game state
   /// [aiPlayer] - The player type the AI is playing as
   /// [maxDepth] - Maximum search depth (lower = faster but weaker)
-  AiMoveResult call(
-    GameEntity game, {
-    PlayerType? aiPlayer,
-    int maxDepth = 9,
-  }) {
+  AiMoveResult call(GameEntity game, {PlayerType? aiPlayer, int maxDepth = 9}) {
     final player = aiPlayer ?? game.currentTurn;
 
     if (game.isGameOver) {

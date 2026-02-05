@@ -39,10 +39,7 @@ class _CellWidgetState extends State<CellWidget>
     );
 
     _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.elasticOut,
-      ),
+      CurvedAnimation(parent: _animationController, curve: Curves.elasticOut),
     );
 
     if (widget.player != PlayerType.none && widget.animate) {
@@ -79,9 +76,7 @@ class _CellWidgetState extends State<CellWidget>
         child: SizedBox(
           width: widget.size,
           height: widget.size,
-          child: Center(
-            child: _buildCellContent(),
-          ),
+          child: Center(child: _buildCellContent()),
         ),
       ),
     );
@@ -128,10 +123,7 @@ class _CellWidgetState extends State<CellWidget>
     }
 
     if (widget.animate) {
-      return ScaleTransition(
-        scale: _scaleAnimation,
-        child: symbol,
-      );
+      return ScaleTransition(scale: _scaleAnimation, child: symbol);
     }
 
     return symbol;
@@ -142,10 +134,7 @@ class _XSymbol extends StatelessWidget {
   final double size;
   final Color color;
 
-  const _XSymbol({
-    required this.size,
-    required this.color,
-  });
+  const _XSymbol({required this.size, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -193,10 +182,7 @@ class _OSymbol extends StatelessWidget {
   final double size;
   final Color color;
 
-  const _OSymbol({
-    required this.size,
-    required this.color,
-  });
+  const _OSymbol({required this.size, required this.color});
 
   @override
   Widget build(BuildContext context) {

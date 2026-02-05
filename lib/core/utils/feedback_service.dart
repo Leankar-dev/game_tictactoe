@@ -48,23 +48,14 @@ class FeedbackService {
   }
 
   Future<void> onMove() async {
-    await Future.wait([
-      playMoveSound(),
-      moveFeedback(),
-    ]);
+    await Future.wait([playMoveSound(), moveFeedback()]);
   }
 
   Future<void> onWin() async {
-    await Future.wait([
-      playWinSound(),
-      winFeedback(),
-    ]);
+    await Future.wait([playWinSound(), winFeedback()]);
   }
 
   Future<void> onDraw() async {
-    await Future.wait([
-      playDrawSound(),
-      moveFeedback(),
-    ]);
+    await Future.wait([playDrawSound(), moveFeedback()]);
   }
 }

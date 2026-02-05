@@ -13,26 +13,21 @@ class WinnerCheckResult {
   });
 
   factory WinnerCheckResult.noWinner() => const WinnerCheckResult(
-        winner: PlayerType.none,
-        winningCells: [],
-        isDraw: false,
-      );
+    winner: PlayerType.none,
+    winningCells: [],
+    isDraw: false,
+  );
 
   factory WinnerCheckResult.draw() => const WinnerCheckResult(
-        winner: PlayerType.none,
-        winningCells: [],
-        isDraw: true,
-      );
+    winner: PlayerType.none,
+    winningCells: [],
+    isDraw: true,
+  );
 
   factory WinnerCheckResult.winner(
     PlayerType player,
     List<({int row, int col})> cells,
-  ) =>
-      WinnerCheckResult(
-        winner: player,
-        winningCells: cells,
-        isDraw: false,
-      );
+  ) => WinnerCheckResult(winner: player, winningCells: cells, isDraw: false);
 
   bool get hasWinner => winner != PlayerType.none;
 
@@ -258,10 +253,7 @@ class CheckWinnerUseCase {
     }
 
     if (cells.length >= winCondition) {
-      return WinnerCheckResult.winner(
-        player,
-        cells.sublist(0, winCondition),
-      );
+      return WinnerCheckResult.winner(player, cells.sublist(0, winCondition));
     }
 
     return WinnerCheckResult.noWinner();
