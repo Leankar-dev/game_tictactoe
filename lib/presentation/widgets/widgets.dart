@@ -1,3 +1,4 @@
+export 'animated_widgets.dart';
 export 'custom_app_bar.dart';
 export 'feedback_wrapper.dart';
 export 'neumorphic_button.dart';
