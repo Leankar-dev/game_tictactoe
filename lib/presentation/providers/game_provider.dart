@@ -7,6 +7,7 @@ import '../../domain/enums/enums.dart';
 import '../../domain/usecases/make_move_usecase.dart';
 import '../../domain/usecases/ai_move_usecase.dart';
 import 'game_state.dart';
+import 'settings_provider.dart';
 
 final gameProvider = NotifierProvider<GameNotifier, GameState>(GameNotifier.new);
 
@@ -97,8 +98,9 @@ class GameNotifier extends Notifier<GameState> {
   }
 
   void _executeCpuMove() {
-    final aiMoveUseCase = ref.read(aiMoveUseCaseProvider);
-    final aiResult = aiMoveUseCase(state.game);
+    final difficultyAiUseCase = ref.read(difficultyAiUseCaseProvider);
+    final difficulty = ref.read(aiDifficultyProvider);
+    final aiResult = difficultyAiUseCase(state.game, difficulty: difficulty);
 
     switch (aiResult) {
       case AiMoveFound found:

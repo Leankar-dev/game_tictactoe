@@ -1,4 +1,5 @@
 import 'dart:math';
+import '../../data/models/settings_model.dart';
 import '../entities/entities.dart';
 import '../enums/enums.dart';
 import 'check_winner_usecase.dart';
@@ -175,5 +176,201 @@ extension GameEntityAiExtension on GameEntity {
   AiMoveResult getAiMove({AiMoveUseCase? useCase, PlayerType? aiPlayer}) {
     final aiMoveUseCase = useCase ?? AiMoveUseCase();
     return aiMoveUseCase(this, aiPlayer: aiPlayer);
+  }
+}
+
+/// Advanced AI using Minimax algorithm with Alpha-Beta pruning.
+class MinimaxAiUseCase {
+  final CheckWinnerUseCase _checkWinnerUseCase;
+
+  const MinimaxAiUseCase({
+    CheckWinnerUseCase? checkWinnerUseCase,
+  }) : _checkWinnerUseCase = checkWinnerUseCase ?? const CheckWinnerUseCase();
+
+  /// Calculates the best move using Minimax.
+  ///
+  /// [game] - Current game state
+  /// [aiPlayer] - The player type the AI is playing as
+  /// [maxDepth] - Maximum search depth (lower = faster but weaker)
+  AiMoveResult call(
+    GameEntity game, {
+    PlayerType? aiPlayer,
+    int maxDepth = 9,
+  }) {
+    final player = aiPlayer ?? game.currentTurn;
+
+    if (game.isGameOver) {
+      return const AiMoveNotFound('Game is already over');
+    }
+
+    if (game.currentTurn != player) {
+      return const AiMoveNotFound('Not AI player\'s turn');
+    }
+
+    final emptyCells = game.board.emptyCells;
+    if (emptyCells.isEmpty) {
+      return const AiMoveNotFound('No available moves');
+    }
+
+    // For first move on empty 3x3 board, just pick a corner (optimization)
+    if (game.boardSize == BoardSize.classic && game.moveCount == 0) {
+      return const AiMoveFound(
+        position: (row: 0, col: 0),
+        reason: AiMoveReason.cornerMove,
+      );
+    }
+
+    // Find best move using Minimax
+    var bestScore = double.negativeInfinity;
+    ({int row, int col})? bestMove;
+
+    for (final cell in emptyCells) {
+      // Simulate move
+      final newBoard = game.board.withMove(cell.row, cell.col, player);
+
+      // Calculate score
+      final score = _minimax(
+        board: newBoard,
+        depth: maxDepth - 1,
+        alpha: double.negativeInfinity,
+        beta: double.infinity,
+        isMaximizing: false,
+        aiPlayer: player,
+        lastMove: cell,
+      );
+
+      if (score > bestScore) {
+        bestScore = score;
+        bestMove = cell;
+      }
+    }
+
+    if (bestMove == null) {
+      return const AiMoveNotFound('No valid move found');
+    }
+
+    return AiMoveFound(
+      position: bestMove,
+      reason: AiMoveReason.winningMove, // Minimax always plays optimally
+    );
+  }
+
+  /// Minimax algorithm with alpha-beta pruning.
+  double _minimax({
+    required BoardEntity board,
+    required int depth,
+    required double alpha,
+    required double beta,
+    required bool isMaximizing,
+    required PlayerType aiPlayer,
+    required ({int row, int col}) lastMove,
+  }) {
+    // Check terminal state
+    final winnerCheck = _checkWinnerUseCase.checkFromMove(
+      board,
+      lastMove.row,
+      lastMove.col,
+    );
+
+    if (winnerCheck.hasWinner) {
+      // AI won
+      if (winnerCheck.winner == aiPlayer) {
+        return 10.0 + depth; // Prefer faster wins
+      }
+      // Opponent won
+      return -10.0 - depth; // Prefer slower losses
+    }
+
+    if (winnerCheck.isDraw || depth == 0) {
+      return 0.0; // Draw or depth limit
+    }
+
+    final emptyCells = board.emptyCells;
+    if (emptyCells.isEmpty) {
+      return 0.0;
+    }
+
+    final currentPlayer = isMaximizing ? aiPlayer : aiPlayer.opponent;
+    var mutableAlpha = alpha;
+    var mutableBeta = beta;
+
+    if (isMaximizing) {
+      var maxEval = double.negativeInfinity;
+
+      for (final cell in emptyCells) {
+        final newBoard = board.withMove(cell.row, cell.col, currentPlayer);
+        final eval = _minimax(
+          board: newBoard,
+          depth: depth - 1,
+          alpha: mutableAlpha,
+          beta: mutableBeta,
+          isMaximizing: false,
+          aiPlayer: aiPlayer,
+          lastMove: cell,
+        );
+
+        maxEval = max(maxEval, eval);
+        mutableAlpha = max(mutableAlpha, eval);
+
+        // Alpha-beta pruning
+        if (mutableBeta <= mutableAlpha) {
+          break;
+        }
+      }
+
+      return maxEval;
+    } else {
+      var minEval = double.infinity;
+
+      for (final cell in emptyCells) {
+        final newBoard = board.withMove(cell.row, cell.col, currentPlayer);
+        final eval = _minimax(
+          board: newBoard,
+          depth: depth - 1,
+          alpha: mutableAlpha,
+          beta: mutableBeta,
+          isMaximizing: true,
+          aiPlayer: aiPlayer,
+          lastMove: cell,
+        );
+
+        minEval = min(minEval, eval);
+        mutableBeta = min(mutableBeta, eval);
+
+        // Alpha-beta pruning
+        if (mutableBeta <= mutableAlpha) {
+          break;
+        }
+      }
+
+      return minEval;
+    }
+  }
+}
+
+/// Factory that creates the appropriate AI based on difficulty.
+class AiFactory {
+  static AiMoveUseCase create(AiDifficulty difficulty) {
+    switch (difficulty) {
+      case AiDifficulty.easy:
+        // Random moves with occasional good plays
+        return AiMoveUseCase();
+      case AiDifficulty.medium:
+        // Priority-based (existing implementation)
+        return AiMoveUseCase();
+      case AiDifficulty.hard:
+        // Minimax - unbeatable
+        // Note: We need an adapter since MinimaxAiUseCase has different interface
+        return _MinimaxAdapter();
+    }
+  }
+}
+
+class _MinimaxAdapter extends AiMoveUseCase {
+  final MinimaxAiUseCase _minimax = const MinimaxAiUseCase();
+
+  @override
+  AiMoveResult call(GameEntity game, {PlayerType? aiPlayer}) {
+    return _minimax(game, aiPlayer: aiPlayer);
   }
 }

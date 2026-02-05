@@ -4,6 +4,7 @@ import '../../data/repositories/repositories.dart';
 import '../../domain/usecases/check_winner_usecase.dart';
 import '../../domain/usecases/make_move_usecase.dart';
 import '../../domain/usecases/ai_move_usecase.dart';
+import '../../domain/usecases/difficulty_ai_usecase.dart';
 
 final databaseProvider = Provider<AppDatabase>((ref) {
   final database = AppDatabase();
@@ -42,4 +43,9 @@ final makeMoveUseCaseProvider = Provider<MakeMoveUseCase>((ref) {
 final aiMoveUseCaseProvider = Provider<AiMoveUseCase>((ref) {
   final checkWinnerUseCase = ref.watch(checkWinnerUseCaseProvider);
   return AiMoveUseCase(checkWinnerUseCase: checkWinnerUseCase);
+});
+
+final difficultyAiUseCaseProvider = Provider<DifficultyAiUseCase>((ref) {
+  final checkWinnerUseCase = ref.watch(checkWinnerUseCaseProvider);
+  return DifficultyAiUseCase(checkWinnerUseCase: checkWinnerUseCase);
 });
